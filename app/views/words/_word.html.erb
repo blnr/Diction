@@ -1,5 +1,6 @@
 <div class='word word-container' id='word-<%= word.id %>'>
 
+        <% # Call define method in Words helper to get definition data for word %>
         <% data = define(word.word) %>
 
           <% # Parse the JSON response %>
@@ -41,4 +42,5 @@
   <p><%= link_to 'Delete', word, :confirm => 'Are you sure?', :method => :delete, :remote => true %></p>
 </div>
 
+<%= will_paginate @words %>
 
