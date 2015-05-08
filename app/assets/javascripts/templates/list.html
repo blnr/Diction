@@ -7,19 +7,11 @@
 </form>
 <!-- end add -->
 
-<div ng-repeat="word in list.words">
- 
-  {{ word.title }} <br>
-  {{ word.date }}
 
-    <!-- definitions -->
-    <ol ng-repeat="d in word.definitions">
-    	<li>{{ d.meaning }}</li>
-    	<!-- examples -->
-    	<ul>
-        	<li>{{ d["examples"][0] }}</li>
-        </ul>
-    </ol>
+<div ng-repeat="word in list.words">
+ {{word.title}}
+<hr>
+</div>
 
 <hr>
 </div>
