@@ -1,14 +1,13 @@
 Rails.application.routes.draw do
 
-	resources :lists, :words, :users
 
-  	root to: 'application#index'	  							# Index Routing
-  	post '/search', to: "words#search"							# Search
-   	#get 'signup', to: "users#new"
+  root to: 'application#angular'	  							# Index Routing
 
-	get    'login', 	to: 'sessions#new'
-	post   'login', 	to: 'sessions#create'
-	delete 'logout', 	to: 'sessions#destroy'
+  resources :lists, only: [:create, :index, :show] do
+    resources :words, only: [:show, :create] do
+    end
+  end
+
 
 
 end

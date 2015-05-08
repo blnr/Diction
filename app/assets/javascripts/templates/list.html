@@ -1,0 +1,25 @@
+<h3>{{list.title}}</h3>
+
+<!-- add word -->
+<form ng-submit="addWord()">
+  <input type="text" ng-model="title"></input>
+  <button type="submit">Add</button>
+</form>
+<!-- end add -->
+
+<div ng-repeat="word in list.words">
+ 
+  {{ word.title }} <br>
+  {{ word.date }}
+
+    <!-- definitions -->
+    <ol ng-repeat="d in word.definitions">
+    	<li>{{ d.meaning }}</li>
+    	<!-- examples -->
+    	<ul>
+        	<li>{{ d["examples"][0] }}</li>
+        </ul>
+    </ol>
+
+<hr>
+</div>

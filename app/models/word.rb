@@ -1,7 +1,7 @@
 class Word < ActiveRecord::Base
 
   belongs_to :list
-  validates :word, uniqueness: {scope: :word}, presence: true
+  validates :title, uniqueness: {scope: :title}, presence: true
 
   # Used for creating multiple words on landing page
   def self.create_words(word)

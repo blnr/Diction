@@ -17,11 +17,10 @@ ActiveRecord::Schema.define(version: 20150326033939) do
   enable_extension "plpgsql"
 
   create_table "lists", force: :cascade do |t|
-    t.string   "name"
+    t.string   "title"
     t.text     "description"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "date"
   end
 
   create_table "users", force: :cascade do |t|
@@ -35,10 +34,9 @@ ActiveRecord::Schema.define(version: 20150326033939) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   create_table "words", force: :cascade do |t|
-    t.string   "word"
+    t.string   "title"
     t.integer  "list_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date"
   end
 
 end

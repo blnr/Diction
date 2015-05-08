@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
 		render layout: "application", template: "index"
 	end
 
+	def angular
+		render 'layouts/application'
+	end
+
 	include SessionsHelper
 
 end

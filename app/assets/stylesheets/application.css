@@ -14,12 +14,7 @@
 
  /*	Debug Information */
 
-.debug_dump {
-	clear: both;
-	float: left;
-	width: 100%;
-	margin-top: 45px;
-	border: thin dotted grey;
-	padding: 5px;
+body {
+	background-color: #757575;
+	color: #fff;
 }
-

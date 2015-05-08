@@ -1,36 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
-	
+<html>
+
 	<head>
-		<title><%= full_title(yield(:title)) %></title>
-		<meta name="viewport" content="width=device-width">
-		<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-		<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+		<title>diction</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+		
+		<%= stylesheet_link_tag    'application', media: 'all' %>
+		<%= javascript_include_tag 'application' %>
 		<%= csrf_meta_tags %>
 	</head>
-	
-	<body>
-		<div id="pagewrap">
-			
-			<%= render "layouts/header" %>
-			
-			<!-- start content -->
-			<div id="content">
 
-			    <% flash.each do |key, value| %>
-			      <div class="alert"> <%= key %><%= value %> </div>
-			    <% end %>
-				
-				<%= yield %>
-
-				<% # Debug Information in dev. envirement %>
-				<%	#debug(params) if Rails.env.development? class: "debug_dump" %>
-
-			</div>
-			<!-- end content -->
-
-			<!-- page overlay for login -->
-			<span id="page-overlay"></span>	
-		</div>
+	<!-- start body -->
+	<body ng-app="d-angular">
+		<!-- render template -->
+		<ui-view>
+		</ui-view>
+		<!-- end render -->
 	</body>
+	<!-- end body -->
+
 </html>

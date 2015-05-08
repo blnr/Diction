@@ -1,0 +1,52 @@
+
+test
+  <div ng-controller="MainCtrl">
+
+    <!-- add a list -->
+    <form ng-submit="addList()">
+      <input type="text" ng-model="title" placeholder="Enter list"></input>
+      <button type="submit">Add</button>
+    </form>
+    <!-- end add -->
+
+    <!-- list all lists -->
+    <select ng-model="list" ng-options="list as list.title for list in lists">
+        <option value="">Select List</option>
+    </select>
+    <!-- end list -->
+
+    <hr>
+
+      <!-- add word -->
+      <form ng-submit="addWord()">
+        <input type="text" ng-model="word" placeholder="Enter words"></input>
+        <button type="submit">Add</button>
+      </form>
+      <!-- end add -->
+
+      <!-- if no words in list -->
+      <div ng-if="list.words.length === 0">
+        <p>[ no words ]</p>
+      </div>
+      <!-- end if -->
+
+      <!-- words in list -->
+      <div ng-repeat="word in list.words">
+       
+        <p>{{ word.title }}</p> 
+        <p>{{ word.date }}</p>
+
+          <!-- definitions -->
+          <ol ng-repeat="w in word.definitions">
+            <li>{{ w.meaning }}</li>
+            <!-- examples -->
+            <ul>
+                <li>{{ w["examples"][0] }}</li>
+            </ul>
+          </ol>
+        <hr>
+
+      </div>
+      <!-- end words -->
+
+  </div>
