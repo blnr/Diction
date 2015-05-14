@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20150326033939) do
 
   create_table "words", force: :cascade do |t|
     t.string   "title"
+    t.json     "full_data"
     t.integer  "list_id"
     t.datetime "date"
   end

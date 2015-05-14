@@ -23,18 +23,6 @@ angular.module('d-angular', ['ui.router', 'templates'])
 		  }
 		})
 
-		// Lists state
-		.state('lists', {
-		  url: '/lists/{id}',
-		  templateUrl: 'list.html',
-		  controller: 'ListsCtrl',
-			resolve: {
-			  list: ['$stateParams', 'lists', function($stateParams, lists) {
-			    return lists.get($stateParams.id);
-			  }]
-			}
-		})
-
 		$urlRouterProvider.otherwise('home');
 	}
 ])
@@ -70,10 +58,19 @@ angular.module('d-angular', ['ui.router', 'templates'])
 		  });
 		};
 
+		// delete list
+		o.delete = function(id) {
+			$http.delete('/lists/' + id + '.json');
+		}
+
 		// add word to list
 		o.addWord = function(id, word) {
 		  return $http.post('/lists/' + id + '/words.json', word);
 		};
+
+		o.deleteWord = function(id, word) {
+			$http.delete('/lists/' + id + '/words/' + word + '.json');
+		}
 
 	  	return o;
 
@@ -90,6 +87,8 @@ angular.module('d-angular', ['ui.router', 'templates'])
 		
 		// array of lists
 		$scope.lists = lists.lists;
+
+		$scope.list = lists.lists[$stateParams.id];
 
 
 		// Add list function
@@ -109,35 +108,47 @@ angular.module('d-angular', ['ui.router', 'templates'])
 			$scope.title = '';
 		};
 
-
-	}
-
-])
-
-// Lists controller
-// ------------------------------
-.controller('ListsCtrl', ['$scope', 'lists', 'list', '$http',
-
-	// Main scope (used in views)
-	function($scope, lists, list, $http){
-		// get list by ID
-		$scope.list = list;
+		$scope.deleteList = function(index) {
+			lists.delete($scope.list.id);		// delete in database
+			$scope.lists.splice(index, 1);		// delete client side
+		};
 
 		// Add word function
 		$scope.addWord = function(){
 
-			lists.addWord(list.id, {
-			  	title: $scope.title,
-				date: new Date().toJSON().slice(0,10),
-			})
-			.success(function(word) {
-				$scope.list.words.push(word);
+			// API URL
+			var api_url = "https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query=";
+
+			// get data from API
+			$http.get(api_url + $scope.word)
+			.success(function (response) {
+
+				// push new word to array
+				lists.addWord($scope.list.id, {
+				  	title: $scope.word,
+					date: new Date().toJSON().slice(0,10),
+					full_data: response.data[0]["dictionary"]["definitionData"][0]["meanings"]
+				})
+				.success(function(word) {
+					$scope.list.words.push(word);
+				});
+
+				// reset title
+				$scope.word = '';
 			});
 
-			$scope.title = '';
 		};
+
+		$scope.deleteWord = function(word_id, index) {
+			lists.deleteWord($scope.list.id, word_id);		// delete from database
+			$scope.list.words.splice(index, 1);				// delete on cleint side
+
+		};
+
+
 	}
 
 ]);
+
 
 

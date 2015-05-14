@@ -1,21 +1,61 @@
 
-  <div ng-controller="MainCtrl">
+    <div ng-controller="MainCtrl">
 
-    <!-- add a list -->
-    <form ng-submit="addList()">
-      <input type="text" ng-model="title" placeholder="Enter list"></input>
-      <button type="submit">Add</button>
-    </form>
-    <!-- end add -->
+      <!-- add a list -->
+      <form ng-submit="addList()">
+        <input type="text" ng-model="title" placeholder="Enter list"></input>
+        <button type="submit">Add</button>
+      </form>
+      <!-- end add -->
 
+      <!-- list all lists -->
+      <select ng-model="list" ng-options="list as list.title for list in lists">
+          <option value="">Select List</option>
+      </select>
+      <!-- end list -->
 
- <div ng-repeat="list in lists">
- {{list.title}}
+      <!-- delete list -->
+      <form ng-submit="deleteList($index)">
+        <button type="submit">Delete</button>
+      </form>
+      <!-- end delete -->
 
-      <span>
-        <a href="#/lists/{{list.id}}">Words</a>
-      </span>
-    </div>
+      <hr>
+      
+      <!-- add word -->
+      <form ng-submit="addWord()">
+        <input type="text" ng-model="word"></input>
+        <button type="submit">Add</button>
+      </form>
+      <!-- end add -->
+
+      <!-- if no words in list -->
+      <div ng-if="list.words.length === 0">
+        <p>[ no words ]</p>
+      </div>
+      <!-- end if -->
+
+      <!-- list all words in list -->
+       <div ng-repeat="word in list.words">
+          {{word.title}}
+          {{word.full_data[0][meaning]}}
+
+          <ol ng-repeat="w in word.full_data">
+            <li>{{ w.meaning }}</li>
+            <!-- examples -->
+            <ul>
+                <li>{{ w.examples[0] }}</li>
+            </ul>
+          </ol>
+
+          <!-- delete word -->
+          <form ng-submit="deleteWord(word.id, $index)">
+            <button type="submit">Delete</button>
+          </form>
+          <!-- end delete -->
+
+      </div>
+      <!-- end words -->
 
 
   </div>

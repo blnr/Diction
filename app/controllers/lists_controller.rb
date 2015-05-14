@@ -13,6 +13,11 @@ class ListsController < ApplicationController
     respond_with List.find(params[:id])
   end
 
+  def destroy
+    List.find(params[:id]).destroy
+    respond_with List.all
+  end
+
   private
   def list_params
     params.require(:list).permit(:title, :description)
