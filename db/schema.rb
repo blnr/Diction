@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20150326033939) do
     t.string   "title"
     t.text     "description"
     t.integer  "user_id"
-    t.datetime "date"
+    t.datetime "created_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -35,9 +35,11 @@ ActiveRecord::Schema.define(version: 20150326033939) do
 
   create_table "words", force: :cascade do |t|
     t.string   "title"
-    t.json     "full_data"
+    t.string   "pronunciation"
+    t.string   "speech"
+    t.json     "definitions"
     t.integer  "list_id"
-    t.datetime "date"
+    t.datetime "created_at", null: false
   end
 
 end

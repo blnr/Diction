@@ -125,9 +125,10 @@ angular.module('d-angular', ['ui.router', 'templates'])
 
 				// push new word to array
 				lists.addWord($scope.list.id, {
-				  	title: $scope.word,
-					date: new Date().toJSON().slice(0,10),
-					full_data: response.data[0]["dictionary"]["definitionData"][0]["meanings"]
+				  	title: 			$scope.word,
+				  	pronunciation: 	response.data[0]["groupResult"]["displayName"].replace("<b>", "").replace("</b>", ""),
+				  	speech: 		response.data[0]["dictionary"]["definitionData"][0]["wordForms"][0]["form"],
+					definitions: 	response.data[0]["dictionary"]["definitionData"][0]["meanings"]
 				})
 				.success(function(word) {
 					$scope.list.words.push(word);
@@ -139,9 +140,9 @@ angular.module('d-angular', ['ui.router', 'templates'])
 
 		};
 
-		$scope.deleteWord = function(word_id, index) {
+		$scope.deleteWord = function(word_id, word) {
 			lists.deleteWord($scope.list.id, word_id);		// delete from database
-			$scope.list.words.splice(index, 1);				// delete on cleint side
+			$scope.list.words.splice($scope.list.words.indexOf(word), 1);				// delete on cleint side
 
 		};
 

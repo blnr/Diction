@@ -31,25 +31,27 @@
 
       <!-- if no words in list -->
       <div ng-if="list.words.length === 0">
-        <p>[ no words ]</p>
+       <p>[ no words ]</p>
       </div>
       <!-- end if -->
 
       <!-- list all words in list -->
-       <div ng-repeat="word in list.words">
-          {{word.title}}
-          {{word.full_data[0][meaning]}}
+       <div ng-repeat="word in list.words | orderBy:'created_at':true">
 
-          <ol ng-repeat="w in word.full_data">
+          {{ word.title }}<br>
+          {{ word.speech }}<br>
+          {{ word.id }}
+          {{ $index }}
+
+          <ol ng-repeat="w in word.definitions">
             <li>{{ w.meaning }}</li>
-            <!-- examples -->
             <ul>
                 <li>{{ w.examples[0] }}</li>
             </ul>
           </ol>
 
           <!-- delete word -->
-          <form ng-submit="deleteWord(word.id, $index)">
+          <form ng-submit="deleteWord(word.id, word)">
             <button type="submit">Delete</button>
           </form>
           <!-- end delete -->
