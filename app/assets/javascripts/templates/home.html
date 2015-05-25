@@ -1,62 +1,48 @@
+	<!-- start search -->
+	<div class="search">
+		<abbr title="Search">
 
-    <div ng-controller="MainCtrl">
+        <!-- add word -->
+        <form ng-submit="addWord()" id="add-word">
+          <input type="text" class="search-form" id="index-search" ng-model="$parent.word" placeholder="Enter words to find definitions..." autofocus></input>
+          <input class="search-glass" type="image" src="search-icon.png" alt="Submit">
+        </form>
+        <!-- end add -->
 
-      <!-- add a list -->
-      <form ng-submit="addList()">
-        <input type="text" ng-model="title" placeholder="Enter list"></input>
-        <button type="submit">Add</button>
-      </form>
-      <!-- end add -->
+		</abbr>									
+	</div>
+	<!-- /search -->
 
-      <!-- list all lists -->
-      <select ng-model="list" ng-options="list as list.title for list in lists">
-          <option value="">Select List</option>
-      </select>
-      <!-- end list -->
+	<!-- welcome message -->
+	<div id="welcome-message">
 
-      <!-- delete list -->
-      <form ng-submit="deleteList($index)">
-        <button type="submit">Delete</button>
-      </form>
-      <!-- end delete -->
+		<!-- heroku test -->
+		
+		<p>Welcome,</p>
+		<p>Search and create vocabulary lists from Google's Definition API...</p>
+		
+		<p style="margin-top: 25px;" class="grey-text">
+			[ <a class="underline-hover" href="http://github.com/blnr/Diction#readme">continue reading...</a> ]
+		</p>
+		
+	</div>
+	<!-- /welcome message -->
 
-      <hr>
-      
-      <!-- add word -->
-      <form ng-submit="addWord()">
-        <input type="text" ng-model="word"></input>
-        <button type="submit">Add</button>
-      </form>
-      <!-- end add -->
+	<!-- page transition -->
+	<div class="loader">
+	    <div class="bar"></div>
+	    <div class="bar"></div>
+	    <div class="bar"></div>
+	</div>
+	<!-- /page transition -->
 
-      <!-- if no words in list -->
-      <div ng-if="list.words.length === 0">
-       <p>[ no words ]</p>
-      </div>
-      <!-- end if -->
+	<!-- start footer -->
+	<footer>
+		<div id="footer-container"><hr>
 
-      <!-- list all words in list -->
-       <div ng-repeat="word in list.words | orderBy:'created_at':true">
+			<span>( <a href="http://github.com/blnr/Diction">GitHub</a> )</span>
+			<span>( &lt;/> in Baltimore by: Kyle Belanger )</span>
 
-          {{ word.title }}<br>
-          {{ word.speech }}<br>
-
-
-          <ol ng-repeat="w in word.definitions">
-            <li>{{ w.meaning }}</li>
-            <ul>
-                <li>{{ w.examples[0] }}</li>
-            </ul>
-          </ol>
-
-          <!-- delete word -->
-          <form ng-submit="deleteWord(word.id, word)">
-            <button type="submit">Delete</button>
-          </form>
-          <!-- end delete -->
-
-      </div>
-      <!-- end words -->
-
-
-  </div>
+		</div>
+	</footer>
+	<!-- /footer -->

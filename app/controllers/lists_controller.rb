@@ -1,12 +1,13 @@
 class ListsController < ApplicationController
   respond_to :json
+  before_filter :authenticate_user!
 
   def index
-    respond_with List.all
+    respond_with current_user.lists
   end
 
   def create
-    respond_with List.create(list_params)
+    respond_with List.create(list_params.merge(user_id: current_user.id))
   end
 
   def show

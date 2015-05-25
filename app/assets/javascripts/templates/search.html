@@ -1,0 +1,99 @@
+<div ng-controller="SearchCtrl">
+
+    <!-- list dashboard -->
+    <section id="list-dashboard">
+
+      <!-- list all lists -->
+      <select id="list-select" class="list-select" ng-model="list" ng-init="list = lists[0]" ng-options="list as list.title for list in lists">
+          <option value="">Select List</option>
+      </select>
+      <!-- end list -->
+
+      <!-- delete list -->
+      <form ng-if="lists.length > 0" ng-submit="deleteList($index)" id="delete-list">
+        <input class="icon" type="image" src="delete.png" alt="Submit">
+      </form>
+      <!-- end delete -->
+
+      <!-- add a list -->
+      <form ng-submit="addList()" id="add-list">
+        <input class="search-form add-list" type="text" ng-model="title" placeholder="Create a list"></input>
+        <input class="icon" type="image" src="add.png" alt="Submit">
+      </form>
+      <!-- end add -->
+
+    </section>
+    <!-- end list dashboard -->
+
+
+    <hr class="dash">
+
+
+    <!-- words dashboard -->
+    <section id="words-dashboard">
+
+      <div ng-if="lists.length <= 0">
+        <span>Select/Create a list</span>
+      </div>
+
+      <div ng-if="lists.length > 0">
+
+        <!-- add word -->
+        <form ng-submit="addWord()" id="add-word">
+          <input type="text" class="search-form" ng-model="$parent.word" placeholder="Add word(s)"></input>
+          <input class="icon search-icon" type="image" src="search-icon.png" alt="Submit">
+        </form>
+        <!-- end add -->
+
+        <div id="display-options-container">
+          <!-- sort -->
+          <span class="display-menu-text blue"><select class="sort-option" ng-init="option = options[0]" ng-model="$parent.selectedOrder" ng-options="option.name for option in options"></select></span>
+
+          <span class="display-menu-text"><input class="sort-option" ng-model="$parent.searchText" placeholder="name, speech, etc."></span>
+
+          <span class="display-menu-text"><input type="checkbox" ng-model="$parent.minimal" aria-label="Toggle ngHide">Collapse</span>
+          <!-- end -->
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- list all words in list -->
+    <div id="words-container" ui-tree>
+
+      <ol ui-tree-nodes="" ng-model="list.words">
+
+        <!-- words in list -->
+        <li ng-repeat="word in list.words | orderBy:selectedOrder.value:selectedOrder.reversed | filter:searchText" class='word word-container' id="word-{{word.id}}" ui-tree-node>
+
+          <!-- delete word -->
+          <form ng-submit="deleteWord(word.id, word)">
+            <abbr title="Delete"><input class="delete-icon icon delete-word" type="image" src="delete.png" alt="Submit"></abbr>
+          </form>
+          <!-- end delete -->
+
+          <p ui-tree-handle class="word">{{ word.title }}</p>
+
+          <section id="minimal" ng-hide="minimal">
+
+            <p class="speech">{{ word.speech }}</p>
+
+            <ol class="definitions" ng-repeat="w in word.definitions">
+              <li role="definition">{{ w.meaning }}</li>
+              <p class="example" ng-if="w.examples[0] !== nil">{{ w.examples[0] }}</p>
+            </ol>
+
+            <p>Created at: {{word.date}}</p>
+
+          </section>
+
+        </li>
+      </ol>
+
+    </div>
+    <!-- end words -->
+
+
+</div>

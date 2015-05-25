@@ -1,9 +1,10 @@
 class WordsController < ApplicationController
   respond_to :json
+  before_filter :authenticate_user!, only: [:create, :destroy]
 
   def create
     list = List.find(params[:list_id])
-    word = list.words.create(word_params)
+    word = list.words.create(word_params.merge(user_id: current_user.id))
     respond_with list, word
   end
 

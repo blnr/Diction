@@ -3,6 +3,7 @@
 
 	<head>
 		<title>diction</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
 		
@@ -13,10 +14,47 @@
 
 	<!-- start body -->
 	<body ng-app="d-angular">
-		<!-- render template -->
-		<ui-view>
-		</ui-view>
-		<!-- end render -->
+
+		<div id="pagewrap">
+
+			<!-- start header -->
+			<header role="masthead" id="home-drop">
+				<div id="masthead-container">	
+					<nav role="base" ng-controller="NavCtrl">
+			          <!-- nav static -->
+			          <nav id="nav-guest">
+			          	<span class="menu-text" ng-hide="signedIn()">( Log-In )<span class="arrow-up"></span></span>
+			          </nav>
+			          <!-- nav login -->
+			          <nav id="nav-user">
+							<li ng-show="signedIn()"><a href="#/">{{ user.username }}</a></li>
+							<li ng-show="signedIn()"><a ng-click="logout()">Log Out</a></li>
+			          </nav>   
+
+					</nav>	
+				</div>
+			</header>
+			<!-- /header -->
+
+			<!-- render template -->
+			<ui-view id="content">
+			</ui-view>
+			<!-- end render -->
+
+			<!-- page overlay for login -->
+			<span id="page-overlay"></span>	
+<!--
+<div class="collapse navbar-collapse pull-right" ng-controller="NavCtrl">
+  <ul class="nav navbar-nav">
+    <li><a href="#/home">Home</a></li>
+    <li ng-hide="signedIn()"><a href="#/login">Log In</a></li>
+    <li ng-hide="signedIn()"><a href="#/register">Register</a></li>
+    <li ng-show="signedIn()"><a href="#/">{{ user.username }}</a></li>
+    <li ng-show="signedIn()"><a ng-click="logout()">Log Out</a></li>
+  </ul>
+</div>-->
+
+		</div>
 	</body>
 	<!-- end body -->
 
