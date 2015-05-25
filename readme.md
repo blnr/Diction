@@ -10,7 +10,8 @@ All index searches are temperary sessions on the client-side, which means if you
 
 Search and add multiple words simontaniously through comma seperation: epitome, fallacy, diction. 
 
-## Archeriture
 
-Front-end: 	AngularJS
-Back-end: 	Ruby on Rails
+## Architecture
+
+| Front-end    | AngularJS
+| Back-end     | Ruby on Rails 4.2  
