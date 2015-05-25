@@ -13,7 +13,7 @@ Search and add multiple words simultaneously through comma seperation: epitome, 
 
 ## Architecture
 
-Front-end: AngularJS<br>
+Front-end: 	AngularJS<br>
 Back-end:	Ruby on Rails 
 
 
@@ -21,7 +21,7 @@ Back-end:	Ruby on Rails
 
 To get up and running locally...
 
-> git clone https://github.com/kylesb/diction.git
-> bundle update
-> rake db:migrate
+> git clone https://github.com/kylesb/diction.git<br>
+> bundle update<br>
+> rake db:migrate<br>
 > rails s
