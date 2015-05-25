@@ -47,11 +47,14 @@
 
         <div id="display-options-container">
           <!-- sort -->
-          <span class="display-menu-text blue"><select class="sort-option" ng-init="option = options[0]" ng-model="$parent.selectedOrder" ng-options="option.name for option in options"></select></span>
 
           <span class="display-menu-text"><input class="sort-option" ng-model="$parent.searchText" placeholder="name, speech, etc."></span>
 
+          <span class="display-menu-text blue"><select class="sort-option" ng-init="option = options[0]" ng-model="$parent.selectedOrder" ng-options="option.name for option in options"></select></span>
+
           <span class="display-menu-text"><input type="checkbox" ng-model="$parent.minimal" aria-label="Toggle ngHide">Collapse</span>
+
+          <span class="display-menu-text"><input type="checkbox" ng-model="$parent.date" aria-label="Toggle ngShow">Date</span>
           <!-- end -->
 
         </div>
@@ -85,7 +88,7 @@
               <p class="example" ng-if="w.examples[0] !== nil">{{ w.examples[0] }}</p>
             </ol>
 
-            <p>Created at: {{word.date}}</p>
+            <p ng-show="date">Created at: {{word.date}}</p>
 
           </section>
 
