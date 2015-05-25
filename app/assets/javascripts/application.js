@@ -303,6 +303,9 @@ angular.module('d-angular', ['ui.router', 'templates', 'ui.tree', 'Devise', 'ang
 						// load search page
 				      	$window.location.assign('/#/search');
 
+						// reset title
+						$scope.word = '';
+
 				});
 			} 
 		};
