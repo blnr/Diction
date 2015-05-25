@@ -13,5 +13,6 @@ Search and add multiple words simontaniously through comma seperation: epitome, 
 
 ## Architecture
 
-| Front-end    | AngularJS
-| Back-end     | Ruby on Rails 4.2  
+Front-end: AngularJS
+
+Back-end:	Ruby on Rails 
