@@ -20,19 +20,49 @@
 			<!-- start header -->
 			<header role="masthead" id="home-drop">
 				<div id="masthead-container">	
+					
+					<!-- base nav -->
 					<nav role="base" ng-controller="NavCtrl">
-			          <!-- nav static -->
-			          <nav id="nav-guest">
-			          	<span class="menu-text" ng-hide="signedIn()">( Log-In )<span class="arrow-up"></span></span>
-			          </nav>
-			          <!-- nav login -->
-			          <nav id="nav-user">
+						<!-- nav guest -->
+						<nav id="nav-guest">
+							<span class="menu-text" ng-hide="signedIn()">( Log-In )<img class="arrow-down" src="arrow_down.png"></span>
+						</nav>
+
+						<!-- nav user -->
+						<nav id="nav-user">
 							<li ng-show="signedIn()"><a href="#/">{{ user.username }}</a></li>
 							<li ng-show="signedIn()"><a ng-click="logout()">Log Out</a></li>
-			          </nav>   
+						</nav> 
+			       </nav>
+			       <!-- / base -->  
 
-					</nav>	
 				</div>
+					<!-- nav log-in -->
+					<nav ng-hide="signedIn()" id="nav-login-container" ng-controller="AuthCtrl">
+						<div id="nav-login">
+
+							<form id="form-login" ng-submit="login()">
+								<table>
+									<tr>
+										<td>Email:</td>
+										<td>Password:</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td><input type="email" class="form-control" placeholder="Email" ng-model="user.email" autofocus></td>
+										<td><input type="password" class="form-control" placeholder="Password" ng-model="user.password"></td>
+										<td><input type="submit" id="submit" class="text" value="Log In"></td>
+									</tr>
+								</table>
+
+								<hr class="dash">
+
+								<p class="text create-account">Create an account</p>
+
+							</form>
+
+						</div>
+					</nav>
 			</header>
 			<!-- /header -->
 
@@ -43,16 +73,6 @@
 
 			<!-- page overlay for login -->
 			<span id="page-overlay"></span>	
-<!--
-<div class="collapse navbar-collapse pull-right" ng-controller="NavCtrl">
-  <ul class="nav navbar-nav">
-    <li><a href="#/home">Home</a></li>
-    <li ng-hide="signedIn()"><a href="#/login">Log In</a></li>
-    <li ng-hide="signedIn()"><a href="#/register">Register</a></li>
-    <li ng-show="signedIn()"><a href="#/">{{ user.username }}</a></li>
-    <li ng-show="signedIn()"><a ng-click="logout()">Log Out</a></li>
-  </ul>
-</div>-->
 
 		</div>
 	</body>

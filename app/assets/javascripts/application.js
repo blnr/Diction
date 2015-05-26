@@ -47,18 +47,6 @@ angular.module('d-angular', ['ui.router', 'templates', 'ui.tree', 'Devise', 'ang
 		  }
 		})
 
-		// Login state
-	    .state('login', {
-	      url: '/login',
-	      templateUrl: '_login.html',
-	      controller: 'AuthCtrl',
-	      onEnter: ['$state', 'Auth', function($state, Auth) {
-	        Auth.currentUser().then(function (){
-	          $state.go('dashboard');
-	        })
-	      }]
-	    })
-
 	    // Register state
 	    .state('register', {
 	      url: '/register',
@@ -223,7 +211,6 @@ angular.module('d-angular', ['ui.router', 'templates', 'ui.tree', 'Devise', 'ang
 		$scope.lists = lists.lists;
 		$scope.list = lists.lists[$stateParams.id];
 
-
 	  	// order by options
 		$scope.options = [{name: 'Custom Sort', value : null, reversed : false}, {name: 'A > Z', value : 'title', reversed : false}, {name: 'Z > A', value : 'title', reversed : true}, {name: 'Date', value : 'date', reversed : true}, {name: 'Speech', value : 'speech', reversed : true}];
 
@@ -249,20 +236,18 @@ angular.module('d-angular', ['ui.router', 'templates', 'ui.tree', 'Devise', 'ang
 			$scope.title = '';
 		};
 
-		$scope.deleteList = function(index) {
-			$scope.lists.splice(index, 1);		// delete client side
+		$scope.deleteList = function(list) {
+			$scope.lists.splice($scope.lists.indexOf(list), 1);	// delete on cleint side
 			// delete all words in list on client side
 			$scope.list.words.splice(0, $scope.list.words.length);
 		};
 
-
-		// Word functions
-		// ------------------------------
-		// Add word function
-		$scope.addWord = function(){
+		// Create list function
+		// used on the index page to create an initial list
+		$scope.createList = function(){
 
 			// if no lists exist, create one
-			if($scope.lists.length === 0) {
+			if($scope.lists.length <= 0) {
 				// push new list to array
 				$scope.lists.push({
 					title: "search", 
@@ -270,14 +255,13 @@ angular.module('d-angular', ['ui.router', 'templates', 'ui.tree', 'Devise', 'ang
 					value: 0,
 					words: []
 				});
-			}
+			}	
 
 			// API URL
 			var api_url = "https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query=";
 
 			// split multiple words
 			var split = $scope.word.split(", ");
-			var	the_word;
 
 			// for each word
 			for(i = 0; i < split.length; i++) {
@@ -287,6 +271,7 @@ angular.module('d-angular', ['ui.router', 'templates', 'ui.tree', 'Devise', 'ang
 
 					// handle successful
 					.success(function (response) {
+
 						// push new word to array
 						$scope.lists[0].words.push({
 							title: response.data[0]["groupResult"]["query"],
@@ -297,13 +282,47 @@ angular.module('d-angular', ['ui.router', 'templates', 'ui.tree', 'Devise', 'ang
 							definitions: response.data[0]["dictionary"]["definitionData"][0]["meanings"]
 						});
 
-						// reset title
-						$scope.word = '';
-
 						// load search page
 				      	$window.location.assign('/#/search');
 
-						// reset title
+						$scope.word = '';
+
+				});
+			} 
+		};
+
+
+
+		// Word functions
+		// ------------------------------
+		// Add word function
+		$scope.addWord = function(){
+
+			// API URL
+			var api_url = "https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query=";
+
+			// split multiple words
+			var split = $scope.word.split(", ");
+
+			// for each word
+			for(i = 0; i < split.length; i++) {
+				
+				// get data from API
+				$http.get(api_url + split[i])
+
+					// handle successful
+					.success(function (response) {
+
+						// push new word to array
+						$scope.list.words.push({
+							title: response.data[0]["groupResult"]["query"],
+							// meta
+							display: response.data[0]["groupResult"]["displayName"].replace("<b>", "").replace("</b>", ""),
+							date: new Date(),
+							speech: response.data[0]["dictionary"]["definitionData"][0]["wordForms"][0]["form"],
+							definitions: response.data[0]["dictionary"]["definitionData"][0]["meanings"]
+						});
+
 						$scope.word = '';
 
 				});
@@ -320,10 +339,10 @@ angular.module('d-angular', ['ui.router', 'templates', 'ui.tree', 'Devise', 'ang
 
 // NAV controller
 // ------------------------------
-.controller('NavCtrl', ['$scope', 'Auth',
+.controller('NavCtrl', ['$scope', 'Auth', '$window',
 
 	// Main scope (used in views)
-	function($scope, Auth) {
+	function($scope, Auth, $window) {
 
 		$scope.signedIn = Auth.isAuthenticated;
 		$scope.logout = Auth.logout;
@@ -342,6 +361,7 @@ angular.module('d-angular', ['ui.router', 'templates', 'ui.tree', 'Devise', 'ang
 
 		$scope.$on('devise:logout', function (e, user){
 			$scope.user = {};
+			$window.location.assign('/#/home');		// redirect to home page
 		});
 	}
 
@@ -356,7 +376,7 @@ function($scope, $state, Auth) {
 
 	$scope.login = function() {
 		Auth.login($scope.user).then(function(){
-		  $state.go('home');
+		  $state.go('dashboard');
 		});
 	};
 

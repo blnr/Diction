@@ -13,8 +13,21 @@ $(document).ready(function () {
 
 
 
-$(document).on("click", ".display-menu-text", function() {
-        $("#sort-options").toggle();
+$(document).on("click", "#nav-guest", function() {
+        $("#nav-login-container").toggle();
+        //$("#page-overlay").show();
+
+    $("#form-login").submit(function () {
+        $("#nav-login-container").hide();
+        $("#form-login input").val("");
+
+    });
+
+
+    //$("#page-overlay, #nav-login-container").click(function () {
+     //   $("#page-overlay, #nav-login-container").hide();
+   // });
+
 });
 
 $(document).on("mouseover", ".word-container", function() {

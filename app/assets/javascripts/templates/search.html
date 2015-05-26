@@ -10,7 +10,7 @@
       <!-- end list -->
 
       <!-- delete list -->
-      <form ng-if="lists.length > 0" ng-submit="deleteList($index)" id="delete-list">
+      <form ng-if="lists.length > 0" ng-submit="deleteList(list)" id="delete-list">
         <input class="icon" type="image" src="delete.png" alt="Submit">
       </form>
       <!-- end delete -->
@@ -27,7 +27,6 @@
 
 
     <hr class="dash">
-
 
     <!-- words dashboard -->
     <section id="words-dashboard">
@@ -48,9 +47,9 @@
         <div id="display-options-container">
           <!-- sort -->
 
-          <span class="display-menu-text"><input class="sort-option" ng-model="$parent.searchText" placeholder="name, speech, etc."></span>
+          <span class="display-menu-text blue"><select class="sort-option" ng-model="$parent.selectedOrder" ng-init="option = options[3]" ng-options="option as option.name for option in options"></select></span>
 
-          <span class="display-menu-text blue"><select class="sort-option" ng-init="option = options[0]" ng-model="$parent.selectedOrder" ng-options="option.name for option in options"></select></span>
+          <span class="display-menu-text"><input class="sort-option" ng-model="$parent.searchText" placeholder="name, speech, etc."></span>
 
           <span class="display-menu-text"><input type="checkbox" ng-model="$parent.minimal" aria-label="Toggle ngHide">Collapse</span>
 
@@ -88,9 +87,9 @@
               <p class="example" ng-if="w.examples[0] !== nil">{{ w.examples[0] }}</p>
             </ol>
 
-            <p ng-show="date">Created at: {{word.date}}</p>
-
           </section>
+
+          <p ng-show="date">Created at: {{word.date}}</p>
 
         </li>
       </ol>

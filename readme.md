@@ -1,6 +1,6 @@
 # Diction
 
-A SPA to search and create vocabulary lists from Google's definition data (define: x). 
+A SPA to search and create vocabulary lists from Google's dictionary data (define: x). 
 
 http://dictionproject.herokuapp.com
 
