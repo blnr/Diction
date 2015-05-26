@@ -13,7 +13,7 @@ Search and add multiple words simultaneously through comma seperation: epitome, 
 
 ## Architecture
 
-Front-end: 	AngularJS 1.2.9<br>
+Front-end: 	AngularJS<br>
 Back-end:	Ruby on Rails 4.2
 
 
