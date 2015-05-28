@@ -7,18 +7,17 @@ $(document).ready(function () {
     });
     // hide
     $("#page-overlay").click(function () {
-        $("#page-overlay, #word-settings").hide();
+        $("#page-overlay, #nav-login-container, #word-settings").hide();
     });
 });
 
 
 
 $(document).on("click", "#nav-guest", function() {
-        $("#nav-login-container").toggle();
-        //$("#page-overlay").show();
+        $("#nav-login-container, #page-overlay").toggle();
 
     $("#form-login").submit(function () {
-        $("#nav-login-container").hide();
+        $("#nav-login-container, #page-overlay").hide();
         $("#form-login input").val("");
 
     });
