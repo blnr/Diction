@@ -8,11 +8,11 @@ http://lexnr.com
 
 All index searches are temperary sessions on the client-side, which means if you refresh the page or navigate away, the data will be lost. In order to save and share lists, you must log-in or create an account. 
 
-Search and add multiple words simultaneously through comma seperation: epitome, fallacy, diction. 
+### Features
 
-Filter words by name, speech, or definition keywords (e.g. adj, noun, 'dismal').
-
-Configure word order through drag and drop using the 'custom order' sort option.
+* Search and add multiple words simultaneously through comma seperation: epitome, fallacy, diction. 
+* Filter words by name, speech, or definition keywords (e.g. adj, noun, 'dismal').
+* Configure word order through drag and drop using the 'custom order' sort option.
 
 
 ## Architecture
@@ -29,3 +29,7 @@ To get up and running locally...
 > bundle update<br>
 > rake db:migrate<br>
 > rails s
+
+## Comments, suggestions, kudos
+
+Please email belanger.kyle@gmail.com
