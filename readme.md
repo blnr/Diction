@@ -8,7 +8,7 @@ http://lexnr.com
 
 All index searches are temperary sessions on the client-side, which means if you refresh the page or navigate away, the data will be lost. In order to save and share lists, you must log-in or create an account. 
 
-#### Features
+Features:
 
 * Search and add multiple words simultaneously through comma seperation: epitome, fallacy, diction. 
 * Filter words by name, speech, or definition keywords (e.g. adj, noun, 'dismal').
@@ -30,6 +30,6 @@ To get up and running locally...
 > rake db:migrate<br>
 > rails s
 
-## Comments, suggestions, kudos
+## Contact
 
-Please email belanger.kyle@gmail.com
+If you have any comments, suggestions, or bug reports - feel free to send me an email: belanger.kyle@gmail.com
