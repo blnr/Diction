@@ -2,7 +2,7 @@
 <html>
 
 	<head>
-		<title>diction</title>
+		<title>Lexnr</title>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
@@ -13,7 +13,7 @@
 	</head>
 
 	<!-- start body -->
-	<body ng-app="d-angular">
+	<body ng-app="lexnr">
 
 		<div id="pagewrap">
 
@@ -30,8 +30,8 @@
 
 						<!-- nav user -->
 						<nav id="nav-user">
-							<li ng-show="signedIn()"><a href="#/">{{ user.username }}</a></li>
-							<li ng-show="signedIn()"><a ng-click="logout()">Log Out</a></li>
+							<span class="menu-text" ng-show="signedIn()">{{ user.firstname }}</span>
+							<span class="menu-text" ng-show="signedIn()"><a ng-click="logout()">Log Out</a></span>
 						</nav> 
 			       </nav>
 			       <!-- / base -->  
@@ -49,8 +49,8 @@
 										<td></td>
 									</tr>
 									<tr>
-										<td><input type="email" class="form-control" placeholder="Email" ng-model="user.email" autofocus></td>
-										<td><input type="password" class="form-control" placeholder="Password" ng-model="user.password"></td>
+										<td><input type="email" class="form-control" placeholder="Email" ng-model="user.email" autofocus required></td>
+										<td><input type="password" class="form-control" placeholder="Password" ng-model="user.password" required></td>
 										<td><input type="submit" id="submit" class="text" value="Log In"></td>
 									</tr>
 								</table>

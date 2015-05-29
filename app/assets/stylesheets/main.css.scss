@@ -355,13 +355,16 @@ nav[role="base"] {
 	display: none;
 }
 
-
+img {
+	position: relative;
+	z-index: -1000;
+}
 
 .icon {
-	position: relative;
+	position: static;
 	width: 10px;
 	opacity: 0.5;
-	z-index: 10;
+	z-index: -100;
 }
 
 .icon:hover {
@@ -541,6 +544,8 @@ li[role="definition"] {
 
 }
 
+
+
 label {
 	float: left;
 	clear: both;
@@ -557,15 +562,15 @@ label {
 	clear: both;
 	float: left;
 	width: 300px;
-	border-bottom: thin dotted grey;
+	height: 15px;
+	border: thin dotted grey;
 }
 
 #submit-button {
 	float: right;
 	width: auto;
-	margin: 15px 0;
-	border: none;
-
+	margin: 5px 0;
+	border: thin dotted #dcdcdc;
 }
 
 .name {

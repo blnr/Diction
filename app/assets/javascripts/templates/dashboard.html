@@ -10,7 +10,7 @@
       <!-- end list -->
 
       <!-- delete list -->
-      <form ng-if="list.id !== nil" ng-submit="deleteList($index)" id="delete-list">
+      <form ng-if="list.id !== nil" ng-submit="deleteList(list)" id="delete-list">
         <input class="icon" type="image" src="delete.png" alt="Submit">
       </form>
       <!-- end delete -->

@@ -2,7 +2,7 @@
 //= require_tree .
 
 
-angular.module('d-angular', ['ui.router', 'templates', 'ui.tree', 'Devise', 'angular-loading-bar'])
+angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'Devise', 'angular-loading-bar'])
 
 // Set routing/configuration
 // ------------------------------
@@ -149,11 +149,11 @@ angular.module('d-angular', ['ui.router', 'templates', 'ui.tree', 'Devise', 'ang
 			$scope.title = '';
 		};
 
-		$scope.deleteList = function(index) {
-			lists.delete($scope.list.id);		// delete in database
-			$scope.lists.splice(index, 1);		// delete client side
-			// delete all words in list on client side
-			$scope.list.words.splice(0, $scope.list.words.length);
+		$scope.deleteList = function(list) {
+			lists.delete($scope.list.id);							// delete in database
+
+			$scope.lists.splice($scope.lists.indexOf(list), 1);		// delete on cleint side
+			$scope.list.words.splice(0, $scope.list.words.length);	// delete all words
 		};
 
 
@@ -361,7 +361,7 @@ angular.module('d-angular', ['ui.router', 'templates', 'ui.tree', 'Devise', 'ang
 
 		$scope.$on('devise:logout', function (e, user){
 			$scope.user = {};
-			$window.location.assign('/#/home');		// redirect to home page
+			$window.location.assign('http://lexnr.com');		// redirect to home page
 		});
 	}
 
