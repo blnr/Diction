@@ -13,7 +13,7 @@ $(document).ready(function () {
 
 
 
-$(document).on("click", "#nav-guest", function() {
+$(document).on("click", "#nav-guest, .create-account", function() {
         $("#nav-login-container, #page-overlay").toggle();
 
     $("#form-login").submit(function () {

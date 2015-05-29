@@ -1,16 +1,32 @@
-<div class="page-header">
-  <h1>Register</h1>
+<p><a href="#/home">Home</a> > Register</p>
+
+<hr class="dash" id="register">
+
+<p class="blue big" style="margin: 0 0 25px 0;">Please use the form below to create an account.</p>
+
+<form ng-submit="register()" id="create-account-form">
+
+<div class="input-group">
+    <label>First name:</label>
+    <input class="name input" type="text" class="form-control" ng-model="user.firstname" autofocus required>
 </div>
 
-<form ng-submit="register()">
-  <div class="input-group">
-    <input type="email" class="form-control" placeholder="Email" ng-model="user.email">
-  </div>
-  <div class="input-group">
-    <input type="text" class="form-control" placeholder="Username" ng-model="user.username">
-  </div>
-  <div class="input-group">
-    <input type="password" class="form-control" placeholder="Password" ng-model="user.password">
-  </div>
-  <input type="submit" class="btn btn-default" value="Register">
+<div class="input-group">
+    <label>Last name:</label>
+    <input class="name input" type="text" class="form-control" ng-model="user.lastname" required>
+</div>
+
+<div class="input-group">
+    <label>Email:</label>
+    <input class="input" type="email" class="form-control" ng-model="user.email" required>
+</div>
+
+<div class="input-group">
+    <label>Password:</label>
+    <input class="input" type="password" class="form-control" ng-model="user.password" required>
+</div>
+
+<label class="text grey" style="margin: 15px 0 0 0;">* All fields required</label>
+
+    <input class="input text" id="submit-button" type="submit" class="btn btn-default" value="Register">
 </form>
