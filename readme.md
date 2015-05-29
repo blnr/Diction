@@ -8,8 +8,6 @@ http://lexnr.com
 
 All index searches are temperary sessions on the client-side, which means if you refresh the page or navigate away, the data will be lost. In order to save and share lists, you must log-in or create an account. 
 
-#### Features:
-
 * Search and add multiple words simultaneously through comma seperation: epitome, fallacy, diction. 
 * Filter words by name, speech, or definition keywords (e.g. adj, noun, 'dismal').
 * Configure word order through drag and drop using the 'custom order' sort option.
