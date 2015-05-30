@@ -48,35 +48,15 @@
 
         <div id="display-options-container">
           <!-- sort -->
-          <span class="display-menu-text blue"><select class="sort-option" ng-model="$parent.selectedOrder" ng-options="option.name for option in options"></select></span>
+
+          <span class="display-menu-text blue"><select class="sort-option" ng-model="$parent.selectedOrder" ng-init="option = options[3]" ng-options="option as option.name for option in options"></select></span>
 
           <span class="display-menu-text"><input class="sort-option" ng-model="$parent.searchText" placeholder="name, speech, etc."></span>
 
           <span class="display-menu-text"><input type="checkbox" ng-model="$parent.minimal" aria-label="Toggle ngHide">Collapse</span>
+
+          <span class="display-menu-text"><input type="checkbox" ng-model="$parent.date" aria-label="Toggle ngShow">Date</span>
           <!-- end -->
-
-
-
-            <!--<table id="sort-options">
-              <tr>
-                <td>Sort:</td>
-                <td>Filter:</td>    
-                <td>Display:</td>
-              </tr>
-              <tr>
-                <td>
-                  <select class="sort-option" ng-model="$parent.selectedOrder" ng-options="option.value for option in options"></select>
-                </td>
-                <td><input class="search-form sort-option" ng-model="$parent.searchText" placeholder="name, speech, etc."></td>    
-                <td>Collapse: <input type="checkbox" ng-model="$parent.minimal" aria-label="Toggle ngHide"></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>    
-                <td>Date: <input type="checkbox" ng-model="$parent.minimal" aria-label="Toggle ngHide"></td>
-              </tr>
-            </table>-->
-
 
         </div>
 

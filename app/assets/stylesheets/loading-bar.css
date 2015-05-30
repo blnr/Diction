@@ -38,9 +38,9 @@
 
 
   background: #00264F;
-  position: fixed;
+  position: absolute;
   z-index: 10002;
-  top: 68px;
+  margin-top: 69px;
   width: 100%;
   height: .5px;
   border-bottom-right-radius: 1px;

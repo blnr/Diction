@@ -8,6 +8,7 @@
 		<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
 		
 		<%= stylesheet_link_tag    'application', media: 'all' %>
+		<meta name="viewport" content="width=device-width" />
 		<%= javascript_include_tag 'application' %>
 		<%= csrf_meta_tags %>
 	</head>
@@ -30,8 +31,11 @@
 
 						<!-- nav user -->
 						<nav id="nav-user">
-							<span class="menu-text" ng-show="signedIn()">{{ user.firstname }}</span>
-							<span class="menu-text" ng-show="signedIn()"><a ng-click="logout()">Log Out</a></span>
+							<span style="margin-left: 5px;" class="menu-text" ng-show="signedIn()"><a ng-click="logout()">Log Out</a></span>
+							<div ng-show="signedIn()" id="grav-container">
+								<img gravatar-src="{{ 'user.email' }}" gravatar-size="100" id="grav-img">
+								<span class="menu-text" style="cursor: default;">{{ user.firstname }}</span>
+							</div>
 						</nav> 
 			       </nav>
 			       <!-- / base -->  
