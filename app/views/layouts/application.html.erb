@@ -32,10 +32,8 @@
 						<!-- nav user -->
 						<nav id="nav-user">
 							<span style="margin-left: 5px;" class="menu-text" ng-show="signedIn()"><a ng-click="logout()">Log Out</a></span>
-							<div ng-show="signedIn()" id="grav-container">
-								<img gravatar-src="{{ 'user.email' }}" gravatar-size="100" id="grav-img">
-								<span class="menu-text" style="cursor: default;">{{ user.firstname }}</span>
-							</div>
+							<span class="menu-text">-</span>
+							<span class="menu-text" style="cursor: default; margin-right: 10px;">{{ user.firstname }}</span>
 						</nav> 
 			       </nav>
 			       <!-- / base -->  
