@@ -4,7 +4,7 @@
     <section id="list-dashboard">
 
       <!-- list all lists -->
-      <select class="list-select" ng-model="list" ng-options="list as list.title for list in lists">
+      <select id="list-select" class="list-select"  ng-model="list" ng-options="list as list.title for list in lists">
           <option value="">Select List</option>
       </select>
       <!-- end list -->
@@ -84,14 +84,14 @@
 
             <p class="speech">{{ word.speech }}</p>
 
-            <ol ng-repeat="w in word.definitions">
+            <ol class="definitions" ng-repeat="w in word.definitions">
               <li role="definition">{{ w.meaning }}</li>
               <p class="example" ng-if="w.examples[0] !== nil">{{ w.examples[0] }}</p>
             </ol>
 
-            <p>Created at: {{word.created_at}}</p>
-
           </section>
+
+          <p ng-show="date">Created at: {{word.date}}</p>
 
         </li>
       </ol>
