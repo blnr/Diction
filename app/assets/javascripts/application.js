@@ -164,10 +164,10 @@ angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'De
 		$scope.addWord = function(){
 
 			// API URL
-			var api_url = "https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query=";
+			var api_url = "http://api.wordnik.com/v4/word.json/epitome/definitions?limit=200&includeRelated=true&sourceDictionaries=ahd&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";
 
 			// get data from API
-			$http.get(api_url + $scope.word)
+			$http.get(api_url)
 			.success(function (response) {
 
 				// push new word to array
@@ -206,133 +206,144 @@ angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'De
 
 	// Main scope (used in views)
 	function($scope, $stateParams, Auth, lists, $http, $window) {
-		
-		// array of lists
-		$scope.lists = lists.lists;
-		$scope.list = lists.lists[$stateParams.id];
 
-	  	// order by options
-		$scope.options = [{name: 'Custom Sort', value : null, reversed : false}, {name: 'A > Z', value : 'title', reversed : false}, {name: 'Z > A', value : 'title', reversed : true}, {name: 'Date', value : 'date', reversed : true}, {name: 'Speech', value : 'speech', reversed : true}];
-
-
-		// List functions
-		// ------------------------------
-		// Add list function
-		// Creates a new list
-		$scope.addList = function(){
-			// prevent empty titles
-			if(!$scope.title || $scope.title === '') { 
-				return;
-			}
-
-			// push new list to array
-			$scope.lists.push({
-				title: $scope.title, 
-				date: new Date(),
-				words: []
-			});
-
-			// reset title
-			$scope.title = '';
-		};
-
-		$scope.deleteList = function(list) {
-			$scope.lists.splice($scope.lists.indexOf(list), 1);	// delete on cleint side
-			// delete all words in list on client side
-			$scope.list.words.splice(0, $scope.list.words.length);
-		};
-
-		// Create list function
-		// used on the index page to create an initial list
+		/* 	createList function
+		 *	used on the index page to create an initial list
+		 *
+		*/
 		$scope.createList = function(){
 
 			// if no lists exist, create one
-			if($scope.lists.length <= 0) {
+			if ($scope.lists.length <= 0) {
 				// push new list to array
 				$scope.lists.push({
-					title: "search", 
+					title: "List A", 
 					date: new Date(),
 					value: 0,
 					words: []
 				});
 			}	
 
-			// API URL
-			var api_url = "https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query=";
+			// prevent empty searches
+			if(!$scope.word || $scope.word === '') { 
+				return;
+			}
+			else {
+
+				// split multiple words
+				var split = $scope.word.split(", ");
+
+				// loop each word
+				angular.forEach(split, function(split, key){
+
+					// API URL
+					var api_url = "https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query=" + split;
+
+						// get data from API
+						$http.get(api_url)
+
+							// handle successful
+							.success(function (response) {
+
+								// if data found
+								if (response.data) {
+									// push new word to array
+									$scope.lists[0].words.push({
+										title: response.data[0]["groupResult"]["query"],
+										// meta
+										display: response.data[0]["groupResult"]["displayName"].replace("<b>", "").replace("</b>", ""),
+										date: new Date(),
+										speech: response.data[0]["dictionaryData"]["definitionData"][0]["wordForms"][0]["pos"],
+										definitions: response.data[0]["dictionaryData"]["definitionData"][0]["meanings"]
+									});
+								}
+								else {
+									console.log('error with response');
+								}
+
+								// load search page
+								$window.location.assign('/#/search');
+
+								$scope.word = '';
+							}) 
+					})
+				}
+		};
+
+		/* 	deleteList function 
+		 * 	deletes list based on ID
+		 *
+		*/
+		$scope.deleteList = function(list) {
+			// delete on client side
+			$scope.lists.splice($scope.lists.indexOf(list), 1);
+			// delete all words in list on client side
+			$scope.list.words.splice(0, $scope.list.words.length);
+		};
+
+		/* 	addWords functions
+	 	 *	add words to specific list
+	 	 *
+	 	*/ 
+		$scope.addWords = function(){
 
 			// split multiple words
 			var split = $scope.word.split(", ");
 
-			// for each word
-			for(i = 0; i < split.length; i++) {
-				
-				// get data from API
-				$http.get(api_url + split[i])
+			// loop each word
+			angular.forEach(split, function(split, key){
 
-					// handle successful
-					.success(function (response) {
+				// API URL
+				var api_url = "https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query=" + split;
 
-						// push new word to array
-						$scope.lists[0].words.push({
-							title: response.data[0]["groupResult"]["query"],
-							// meta
-							display: response.data[0]["groupResult"]["displayName"].replace("<b>", "").replace("</b>", ""),
-							date: new Date(),
-							speech: response.data[0]["dictionary"]["definitionData"][0]["wordForms"][0]["form"],
-							definitions: response.data[0]["dictionary"]["definitionData"][0]["meanings"]
-						});
+					// get data from API
+					$http.get(api_url)
 
-						// load search page
-				      	$window.location.assign('/#/search');
+						// handle successful
+						.success(function (response) {
 
-						$scope.word = '';
+							// if data found
+							if (response.data) {
+								// push new word to array
+								$scope.list.words.push({
+									title: response.data[0]["groupResult"]["query"],
+									// meta
+									display: response.data[0]["groupResult"]["displayName"].replace("<b>", "").replace("</b>", ""),
+									date: new Date(),
+									speech: response.data[0]["dictionaryData"]["definitionData"][0]["wordForms"][0]["pos"],
+									definitions: response.data[0]["dictionaryData"]["definitionData"][0]["meanings"]
+								});
+							}
+							else {
+								console.log('Error with response');
+							}
+						 
+				})
 
-				});
-			} 
+			})
 		};
 
-
-
-		// Word functions
-		// ------------------------------
-		// Add word function
-		$scope.addWord = function(){
-
-			// API URL
-			var api_url = "https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query=";
-
-			// split multiple words
-			var split = $scope.word.split(", ");
-
-			// for each word
-			for(i = 0; i < split.length; i++) {
-				
-				// get data from API
-				$http.get(api_url + split[i])
-
-					// handle successful
-					.success(function (response) {
-
-						// push new word to array
-						$scope.list.words.push({
-							title: response.data[0]["groupResult"]["query"],
-							// meta
-							display: response.data[0]["groupResult"]["displayName"].replace("<b>", "").replace("</b>", ""),
-							date: new Date(),
-							speech: response.data[0]["dictionary"]["definitionData"][0]["wordForms"][0]["form"],
-							definitions: response.data[0]["dictionary"]["definitionData"][0]["meanings"]
-						});
-
-						$scope.word = '';
-
-				});
-			} 
-		};
-
-		// Delete word from list
+		/*	deleteWord function
+		 *	delete word from list
+		 *
+		*/
 		$scope.deleteWord = function(word_id, word) {
 			$scope.list.words.splice($scope.list.words.indexOf(word), 1);	// delete on cleint side
 		};
+
+		// on page load
+		// ------------------------------------
+		// all lists
+		$scope.lists = lists.lists;
+
+		// default list used on search page
+		$scope.list = $scope.lists[0];
+
+	  	// order by options
+		$scope.sortOptions = [{name: 'Custom Sort', value : null, reversed : false}, {name: 'A > Z', value : 'title', reversed : false}, {name: 'Z > A', value : 'title', reversed : true}, {name: 'Date', value : 'date', reversed : true}, {name: 'Speech', value : 'speech', reversed : true}];
+		
+		// set default order
+		$scope.selectedOrder = $scope.sortOptions[3];
 	}
 ])
 

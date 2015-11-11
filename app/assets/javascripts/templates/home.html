@@ -1,40 +1,34 @@
-	<!-- start search -->
-	<div class="search">
-		<abbr title="Search">
 
-        <!-- add word -->
-        <form ng-submit="createList()" id="add-word">
-          <input type="text" class="search-form" id="index-search" ng-model="$parent.word" placeholder="Enter words to find definitions..." autofocus></input>
-          <input class="search-glass" type="image" src="search-icon.png" alt="Submit">
-        </form>
-        <!-- end add -->
+	<div class="splash-message">
 
-		</abbr>									
+			<!-- welcome message -->
+			<div class="row">
+
+				<div class="welcome-message">
+					<p class="header">Diction is a simple tool for creating, and sharing vocabulary <u title="View an example of a published list" class="underline">lists</u>. <span class="underline-hover grey" title="Read more...">( ... )</span></p>
+					
+				</div>
+				
+			</div>
+			<!-- /welcome message -->
+
+			<!-- start search -->
+			<div class="row">
+
+				<abbr title="search">
+					<!-- add word -->
+					<form ng-submit="createList()" class="form-inline splash-search">
+						<div class="form-group">
+							<input type="text" id="form-search" class="splash-input" ng-model="$parent.word" placeholder="epitome, fallacy, dismal" autofocus></input>
+							<button type="button" class="button-sm btn btn-default" aria-label="Left Align">
+							  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+							</button>
+						</div>
+			        </form>
+			        <!-- end add -->
+				</abbr>									
+			
+			</div>
+			<!-- /search -->
+
 	</div>
-	<!-- /search -->
-
-	<!-- welcome message -->
-	<div id="welcome-message">
-
-		<!-- heroku test -->
-		
-		<p>Welcome,</p>
-		<p>Search and create vocabulary lists from Google's Dictionary API...</p>
-		
-		<p style="margin-top: 25px;" class="grey-text">
-			[ <a class="underline-hover" href="http://github.com/kylesb/lexnr#readme">continue reading...</a> ]
-		</p>
-		
-	</div>
-	<!-- /welcome message -->
-
-	<!-- start footer -->
-	<footer>
-		<div id="footer-container"><hr>
-
-			<span>( <a href="http://github.com/kylesb/lexnr">GitHub</a> )</span>
-			<span>( &lt;/> in Baltimore by: <a href="mailto:belanger.kyle@gmail.com">Kyle Belanger</a> )</span>
-
-		</div>
-	</footer>
-	<!-- /footer -->

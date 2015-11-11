@@ -1,66 +1,87 @@
 <div ng-controller="SearchCtrl">
 
-    <!-- list dashboard -->
-    <section id="list-dashboard">
+  <div class="row">
+
+    <input ng-model="list.title" value="{{lists[0]['title']}}">
+
+    <button type="button" class="button-icon">
+      <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+    </button>
+
+    <button type="button" class="button-icon">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </button>
+
+    <!-- float right -->
+    <section class="pull-right">
+
+      <!-- hidden section -->
+      <section class="list-options hidden">
+        <button type="button" class="button-icon">
+          <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Information
+        </button>
+        <button type="button" class="button-icon">
+          <span class="glyphicon glyphicon-share" aria-hidden="true"></span> Share
+        </button>
+        <button type="button" class="button-icon">
+          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+        </button>
+      </section>
+      <!-- / hidden -->
+
+      <button type="button" class="button-icon">
+        <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
+      </button>
+    </section>
+    <!-- / right -->
 
       <!-- list all lists -->
-      <select id="list-select" class="list-select" ng-model="list" ng-init="list = lists[0]" ng-options="list as list.title for list in lists">
-          <option value="">Select List</option>
-      </select>
+      <!--<select class="list-select input-sm" ng-model="list" ng-init="list = lists[0]" ng-options="list as list.title for list in lists">
+      </select>-->
       <!-- end list -->
 
-      <!-- delete list -->
-      <form ng-if="lists.length > 0" ng-submit="deleteList(list)" id="delete-list">
-        <input class="icon" type="image" src="delete.png" alt="Submit">
-      </form>
-      <!-- end delete -->
+  </div>
 
-      <!-- add a list -->
-      <form ng-submit="addList()" id="add-list">
-        <input class="search-form add-list" type="text" ng-model="title" placeholder="Create a list"></input>
-        <input class="icon" type="image" src="add.png" alt="Submit">
-      </form>
-      <!-- end add -->
+  <hr class="dash">
 
-    </section>
-    <!-- end list dashboard -->
+  <div class="row">
 
+    <!-- add word -->
+    <form ng-submit="addWords()">
+      <input type="text" ng-model="$parent.word" placeholder="disdain, dismal, aloof" autofocus="true"></input>
+      <button type="button" class="button-icon">
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+      </button>
+    </form>
+    <!-- end add -->
 
-    <hr class="dash">
+    <!-- pull right -->
+    <section class="pull-right">
+      <button type="button" class="button-icon">
+        <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
+      </button>
 
-    <!-- words dashboard -->
-    <section id="words-dashboard">
+      <!-- word options -->
+      <section class="hidden word-options">
+        <!-- filter options -->
+        <input class="sort-option" ng-model="$parent.searchText" placeholder="noun, title, definition">
+        <button type="button" class="button-icon">
+          <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+        </button>
+        <!-- sort options -->
+        <select ng-model="selectedOrder" ng-options="option as option.name for option in sortOptions"></select>
 
-      <div ng-if="lists.length <= 0">
-        <span>Select/Create a list</span>
-      </div>
+        <span class="display-menu-text"><input type="checkbox" ng-model="$parent.minimal" aria-label="Toggle ngHide">Collapse</span>
 
-      <div ng-if="lists.length > 0">
-
-        <!-- add word -->
-        <form ng-submit="addWord()" id="add-word">
-          <input type="text" class="search-form" ng-model="$parent.word" placeholder="Add word(s)"></input>
-          <input class="icon search-icon" type="image" src="search-icon.png" alt="Submit">
-        </form>
-        <!-- end add -->
-
-        <div id="display-options-container">
-          <!-- sort -->
-
-          <span class="display-menu-text blue"><select class="sort-option" ng-model="$parent.selectedOrder" ng-init="option = options[3]" ng-options="option as option.name for option in options"></select></span>
-
-          <span class="display-menu-text"><input class="sort-option" ng-model="$parent.searchText" placeholder="name, speech, etc."></span>
-
-          <span class="display-menu-text"><input type="checkbox" ng-model="$parent.minimal" aria-label="Toggle ngHide">Collapse</span>
-
-          <span class="display-menu-text"><input type="checkbox" ng-model="$parent.date" aria-label="Toggle ngShow">Date</span>
-          <!-- end -->
-
-        </div>
-
-      </div>
+        <span class="display-menu-text"><input type="checkbox" ng-model="$parent.date" aria-label="Toggle ngShow">Date</span>
+      </section>
 
     </section>
+
+  </div>
+
+
+  <div class="row">
 
     <!-- list all words in list -->
     <div id="words-container" ui-tree>
@@ -70,13 +91,7 @@
         <!-- words in list -->
         <li ng-repeat="word in list.words | orderBy:selectedOrder.value:selectedOrder.reversed | filter:searchText" class='word word-container' id="word-{{word.id}}" ui-tree-node>
 
-          <!-- delete word -->
-          <form ng-submit="deleteWord(word.id, word)">
-            <abbr title="Delete"><input class="delete-icon icon delete-word" type="image" src="delete.png" alt="Submit"></abbr>
-          </form>
-          <!-- end delete -->
-
-          <p ui-tree-handle class="word">{{ word.title }}</p>
+          <p ui-tree-handle class="word word-title">{{ word.title }}</p>
 
           <section id="minimal" ng-hide="minimal">
 
@@ -91,11 +106,19 @@
 
           <p ng-show="date">Created at: {{word.date}}</p>
 
+          <!-- delete word -->
+            <button ng-click="deleteWord(word.id, word)" type="button" class="button-icon">
+              <span title="Delete" class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            </button>
+          <!-- end delete -->
+
         </li>
       </ol>
 
     </div>
     <!-- end words -->
+  </div>
 
+  </div>
 
 </div>
