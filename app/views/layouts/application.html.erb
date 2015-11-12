@@ -35,7 +35,44 @@
 				      <button type="button" class="button-icon pull-right" id="nav-menu">
 				        <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
 				      </button>
+
+				      <br><br><br>
+
+						<!-- guest user -->
+						<nav ng-hide="signedIn()" class="pull-right" ng-controller="AuthCtrl">
+							<div id="nav-login">
+
+								<form id="form-login" ng-submit="login()">
+									<table id="login-table">
+										<tr>
+											<td>Email:</td>
+										</tr>
+										<tr>
+											<td><input type="email" class="full-width" ng-model="user.email" autofocus required></td>
+										</tr>
+										<tr>
+											<td>Password:</td>
+										</tr>
+										<tr>
+											<td><input type="password" class=full-width ng-model="user.password" required></td>
+										</tr>
+											<td>
+												<input type="submit" id="submit" class="text" value="Log In">
+											</td>
+									</table>
+								</form>
+
+							</div>
+						</nav>
+						<!-- / guest -->
 					</div>
+
+					<!-- loggin in -->
+					<nav ng-show="signedIn()" ng-controller="NavCtrl">
+						<a ng-click="logout()">Log Out</a>
+						<span>{{ user.firstname }}</span>
+					</nav> 
+					<!-- / logged -->
 
 					<!-- nav user 
 					<nav id="nav-user">

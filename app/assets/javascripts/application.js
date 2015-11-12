@@ -2,7 +2,7 @@
 //= require_tree .
 
 
-angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'Devise', 'angular-loading-bar'])
+angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'Devise', 'angular-loading-bar', 'ui.bootstrap'])
 
 // Set routing/configuration
 // ------------------------------
@@ -163,27 +163,44 @@ angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'De
 		// Add word function
 		$scope.addWord = function(){
 
-			// API URL
-			var api_url = "http://api.wordnik.com/v4/word.json/epitome/definitions?limit=200&includeRelated=true&sourceDictionaries=ahd&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";
 
-			// get data from API
-			$http.get(api_url)
-			.success(function (response) {
+			// split multiple words
+			var split = $scope.word.split(", ");
 
-				// push new word to array
-				lists.addWord($scope.list.id, {
-				  	title: 			$scope.word,
-				  	pronunciation: 	response.data[0]["groupResult"]["displayName"].replace("<b>", "").replace("</b>", ""),
-				  	speech: 		response.data[0]["dictionary"]["definitionData"][0]["wordForms"][0]["form"],
-					definitions: 	response.data[0]["dictionary"]["definitionData"][0]["meanings"]
+			// loop each word
+			angular.forEach(split, function(split, key){
+
+				// API URL
+				var api_url = "https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query=" + split;
+
+					// get data from API
+					$http.get(api_url)
+
+						// handle successful
+						.success(function (response) {
+
+							// if data found
+							if (response.data) {
+								// push new word to array
+								lists.addWord($scope.list.id, {
+									title: response.data[0]["groupResult"]["query"],
+									// meta
+									display: response.data[0]["groupResult"]["displayName"].replace("<b>", "").replace("</b>", ""),
+									date: new Date(),
+									speech: response.data[0]["dictionaryData"]["definitionData"][0]["wordForms"][0]["pos"],
+									definitions: response.data[0]["dictionaryData"]["definitionData"][0]["meanings"]
+								})
+								.success(function(word) {
+									$scope.list.words.push(word);
+								});
+							}
+							else {
+								console.log('error with response');
+							}
+
+							$scope.word = '';
+						}) 
 				})
-				.success(function(word) {
-					$scope.list.words.push(word);
-				});
-
-				// reset title
-				$scope.word = '';
-			});
 
 		};
 
@@ -270,15 +287,44 @@ angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'De
 				}
 		};
 
+		/* 	addList function 
+		 * 	creates new list
+		 *
+		*/
+		$scope.addList = function(){
+
+			$scope.lists.push({
+				title: "List - " + new Date().toJSON().slice(0,10),
+				date: new Date().toJSON().slice(0,10),
+				words: []
+			});
+
+			// reset title
+			$scope.title = '';
+		};
+
 		/* 	deleteList function 
 		 * 	deletes list based on ID
 		 *
 		*/
 		$scope.deleteList = function(list) {
-			// delete on client side
-			$scope.lists.splice($scope.lists.indexOf(list), 1);
-			// delete all words in list on client side
-			$scope.list.words.splice(0, $scope.list.words.length);
+			// confirm delete
+			var confirmDelete = confirm("Are you sure you want to delete this list?");
+
+			if (confirmDelete) {
+				// delete on client side
+				$scope.lists.splice($scope.lists.indexOf(list), 1);
+				// delete all words in list on client side
+				$scope.list.words.splice(0, $scope.list.words.length);
+
+				// update current list selection
+				if ($scope.lists.length > 0) {
+					$scope.list = $scope.lists[0];
+				}
+				else {
+					$scope.list = undefined;
+				}
+			}
 		};
 
 		/* 	addWords functions
@@ -331,6 +377,17 @@ angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'De
 			$scope.list.words.splice($scope.list.words.indexOf(word), 1);	// delete on cleint side
 		};
 
+		/* 	deleteList function 
+		 * 	deletes list based on ID
+		 *
+		*/
+		$scope.updateList = function(index) {
+			// update on client side
+			$scope.list = $scope.lists[index];
+			//$scope.lists[list].title = $scope.list.title;
+		};
+
+
 		// on page load
 		// ------------------------------------
 		// all lists
@@ -372,7 +429,7 @@ angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'De
 
 		$scope.$on('devise:logout', function (e, user){
 			$scope.user = {};
-			$window.location.assign('http://lexnr.com');		// redirect to home page
+			$window.location.assign('/#/home');		// redirect to home page
 		});
 	}
 

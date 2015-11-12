@@ -9,6 +9,7 @@ $(document).ready(function () {
     $("#page-overlay").click(function () {
         $("#page-overlay, #nav-login-container, #word-settings").hide();
     });
+
 });
 
 
@@ -22,6 +23,7 @@ $(document).on("click", "#nav-guest, .create-account", function() {
 
     });
 
+    //$('.dropdown-toggle').dropdown();
 
     //$("#page-overlay, #nav-login-container").click(function () {
      //   $("#page-overlay, #nav-login-container").hide();
@@ -29,11 +31,22 @@ $(document).on("click", "#nav-guest, .create-account", function() {
 
 });
 
+
+
+$(document).on("click", "#list-options-click", function() {
+    $('.list-options').toggle();
+});
+
+$(document).on("click", "#word-options-click", function() {
+    $('.word-options').toggle();
+});
+
+
 $(document).on("mouseover", ".word-container", function() {
         $(".delete-word").show();
 
         // hide
-        $("#words-container").mouseover(function () {
+        $("#words-container").mouseout(function () {
             $(".delete-word").hide();
         });
 
