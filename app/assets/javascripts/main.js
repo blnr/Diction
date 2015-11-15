@@ -1,27 +1,10 @@
-$(document).ready(function () {
-    // Word settings
-    // --------------------------------
-    $("#display-menu-text").click(function () {
-        // display
-        $("#page-overlay, #sort-options").show();
-    });
-    // hide
-    $("#page-overlay").click(function () {
-        $("#page-overlay, #nav-login-container, #word-settings").hide();
-    });
-
-});
 
 
+$(document).on("click", "#nav-display-click", function() {
+    
+    //$('#content').css('margin', '225px auto');
 
-$(document).on("click", "#nav-guest, .create-account", function() {
-        $("#nav-login-container, #page-overlay").toggle();
-
-    $("#form-login").submit(function () {
-        $("#nav-login-container, #page-overlay").hide();
-        $("#form-login input").val("");
-
-    });
+    $("#guest-user").toggle();
 
     //$('.dropdown-toggle').dropdown();
 
@@ -30,6 +13,7 @@ $(document).on("click", "#nav-guest, .create-account", function() {
    // });
 
 });
+
 
 
 
@@ -43,12 +27,12 @@ $(document).on("click", "#word-options-click", function() {
 
 
 $(document).on("mouseover", ".word-container", function() {
-        $(".delete-word").show();
+
+        $(this).children(".delete-word").show();
 
         // hide
         $("#words-container").mouseout(function () {
             $(".delete-word").hide();
         });
-
 });
 

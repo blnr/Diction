@@ -59,7 +59,7 @@ u.underline {
   margin: 165px auto;
 }
 
-#form-search {
+#form-search, .form-search {
     border: thin solid #8FB1FF;
 	width: 730px;
 }
@@ -141,17 +141,18 @@ a {
 header[role="masthead"] {
     position: absolute;
     width: 100%;
-    /* margin: -15px; */
+    /*margin: -15px 0 0 0;*/
     /* border-bottom: thin dotted grey; */
     /* padding: 25px 0; */
     /* background-color: #FDFDFD; */
-    height: 75px;
+    min-height: 75px;
 
 	#masthead-container {
 	    margin: 0 auto;
 	    width: 90%;
 	    border-bottom: thin dotted;
-	    height: 75px;
+	    min-height: 75px;
+	    overflow: auto;
 	}
 }
 
@@ -173,7 +174,7 @@ nav[role="base"] {
 
 
 .word {
-	font-size: 18px;
+	font-size: 20px;
 	margin: 10px 0;
 }
 
@@ -191,7 +192,8 @@ nav[role="base"] {
 }
 
 .speech {
-	margin: -5px 0px;
+	font-style: italic;
+	margin: -3px 0px;
 }
 
 .definitions {
@@ -233,14 +235,22 @@ li[role="definition"] {
 }
 
 #words-container {
-    margin: 25px 0 0 0;
+    margin: 45px 0 0 0;
 }
 
 .word-container {
     border-left: thin dotted grey;
     padding-left: 15px;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
+    width: 70%;
+    /* padding: 1px 15px; */
+    padding-bottom: 20px;
 }
+
+.word-container:hover {
+    background-color: #FAFAFA;
+}
+
 
 .dashboard-message {
 	width: 800px;
@@ -250,6 +260,10 @@ li[role="definition"] {
 
 #login-table {
 	width: 400px;
+}
+
+#register-table {
+	width: 800px;
 }
 
 .full-width {
@@ -270,12 +284,12 @@ form {
 }
 
 .list-options, .word-options {
-	display: none;
+	/*display: none;*/
 }
 
 .list-options button {
-    margin: 0 3px;
-    opacity: .75;
+    margin: 0 2px;
+    opacity: .85;
 }
 
 section {
@@ -298,4 +312,28 @@ section {
     box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
 }
 
+#guest-user {
+    clear: both;
+    display: none;
+    margin: 0 0 15px 0;
+}
 
+input:focus {
+    border: thin solid #8FB1FF;
+}
+
+.option-choice {
+    display: inline;
+    margin: 0 5px;
+    border-right: thin dotted grey;
+    padding: 0 5px 0 0;
+}
+
+.register-benefits-container {
+    border-left: thin dotted grey;
+    height: 100%;
+}
+
+.h3 {
+	font-family: "Times New Roman";
+}

@@ -32,14 +32,12 @@
 					</div>
 
 					<div class="col-md-6 pull-right padding-none">
-				      <button type="button" class="button-icon pull-right" id="nav-menu">
-				        <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-				      </button>
-
-				      <br><br><br>
+						<button type="button" class="button-icon pull-right" id="nav-display-click">
+							<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+						</button>
 
 						<!-- guest user -->
-						<nav ng-hide="signedIn()" class="pull-right" ng-controller="AuthCtrl">
+						<nav ng-hide="signedIn()" id="guest-user" class="pull-right" ng-controller="AuthCtrl">
 							<div id="nav-login">
 
 								<form id="form-login" ng-submit="login()">
@@ -56,9 +54,12 @@
 										<tr>
 											<td><input type="password" class=full-width ng-model="user.password" required></td>
 										</tr>
+										<tr>
 											<td>
-												<input type="submit" id="submit" class="text" value="Log In">
+												<input class="pull-left" type="submit" id="submit" class="text" value="Log In">
+												<span class="pull-right">[ create account ]</span>
 											</td>
+										</tr>
 									</table>
 								</form>
 

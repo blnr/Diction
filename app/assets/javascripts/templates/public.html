@@ -1,66 +1,23 @@
-<div ng-controller="MainCtrl">
+<div ng-controller="PublicCtrl">
 
   <div class="row">
-
-    <form>
-      <input ng-model="list.title" value="{{lists[0]['title']}}">
-    </form>
-
-    <div class="dropdown display-inline">
-      <button type="button" class="button-icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li ng-repeat="list in lists"><a ng-click="updateList($index)">{{ list.title }}</a></li>
-      </ul>
+    <div class="col-md-6 pull-left">
+	    <p class="h3">{{ list.title }}</p>
+	    <p>
+	    	<div ng-if="!list.description">
+	    		No descripton available...
+	    	</div>
+	    	{{ list.description }}
+	    </p>
+	</div>
+	<div class="col-md-6 pull-right">
+    	<p class="pull-right">Last updated: {{ list.created_at }}</p>
     </div>
-
-
-    <!-- float right -->
-    <section class="pull-right">
-
-      <!-- hidden section -->
-      <section class="list-options display-inline">
-        <button ng-click="addList()" type="button" class="button-icon">
-          <span>New</span>
-        </button>
-        <button ng-click="deleteList(list)" type="button" class="button-icon">
-          <span>Delete</span>
-        </button>
-        <button ng-click="shareList(list)" type="button" class="button-icon">
-          <span>Share</span>
-        </button>
-        <button type="button" class="button-icon">
-          <span>Information</span>
-        </button>
-      </section>
-      <!-- / hidden -->
-
-      <button type="button" class="button-icon" id="list-options-click">
-        <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
-      </button>
-    </section>
-    <!-- / right -->
-
-      <!-- list all lists -->
-      <!--<select class="list-select input-sm" ng-model="list" ng-init="list = lists[0]" ng-options="list as list.title for list in lists">
-      </select>-->
-      <!-- end list -->
-
   </div>
 
   <hr class="dash">
 
   <div class="row" ng-if="list">
-
-    <!-- add word -->
-    <form ng-submit="addWords()">
-      <input type="text" ng-model="$parent.word" id="search-word" placeholder="disdain, dismal, aloof" autofocus="true"></input>
-      <button type="button" class="button-icon">
-        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-      </button>
-    </form>
-    <!-- end add -->
 
     <!-- float right -->
     <section class="pull-right">
@@ -82,10 +39,6 @@
             </div>
           </div>
         </div>
-
- 
-
-
 
         <div class="option-choice">
           <!-- collapse -->
@@ -116,18 +69,12 @@
     <!-- / empty list -->
 
     <!-- list all words in list -->
-    <div ng-if="list.words.length > 0" id="words-container" ui-tree>
+    <div ng-if="list.words.length > 0" id="words-container" style="margin-top: -25px" ui-tree>
 
       <ol ui-tree-nodes="" ng-model="list.words">
 
         <!-- words in list -->
         <li ng-mousedown="updateSort()" ng-repeat="word in list.words | orderBy:selectedOrder.value:selectedOrder.reversed | filter:searchText" class='word word-container' id="word-{{word.id}}" ui-tree-node>
-
-          <!-- delete word -->
-          <button class="delete-word pull-right button-icon" ng-click="deleteWord(word.id, word)" type="button" class="button-icon">
-            <span title="Delete" class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-          </button>
-          <!-- end delete -->
 
           <p ui-tree-handle class="word word-title">{{ word.title }}</p>
 

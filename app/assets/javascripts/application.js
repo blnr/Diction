@@ -35,6 +35,18 @@ angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'De
 	      }]
 	    })
 
+		// Public state
+	    .state('public', {
+	      url: '/public/:hash_key',
+	      templateUrl: 'public.html',
+	      controller: 'PublicCtrl',
+		  resolve: {
+			  listPromise: ['lists', '$stateParams', function(lists, $stateParams){
+			    return lists.get_public($stateParams['hash_key']);
+			  }]
+		  }
+	    })
+
 		// Dashboard state
 		.state('dashboard', {
 		  url: '/dashboard',
@@ -67,9 +79,9 @@ angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'De
 // lists factory
 // Factories are used to organize and share code across the app.
 // ------------------------------
-.factory('lists', ['$http',
+.factory('lists', ['$http', '$state',
 
-	function($http){
+	function($http, $state){
 		// create new obect with array of lists
 		var o = { lists: [] };
 
@@ -87,12 +99,32 @@ angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'De
 		  });
 		};
 
+		// get specific list
+		o.get_public = function(hash_key) {
+			return $http.get('/public/' + hash_key + '.json').then(function(data){
+		  		// only return if param matches public list hash
+		  		if (data['data'] == 'null') {
+					$state.go('home');
+		  		}
+		  		else {
+			  		angular.copy(data, o.lists);
+		  		}
+			});
+		};
+
 		// create list
 		o.create = function(post) {
 		  return $http.post('/lists.json', post).success(function(data){
 		    o.lists.push(data);
 		  });
 		};
+
+		/* update list
+		o.update = function(id, post) {
+		  return $http.put('/lists/' + id + '.json', post).success(function(data){
+		    o.lists.push(data);
+		  });
+		}*/
 
 		// delete list
 		o.delete = function(id) {
@@ -116,53 +148,69 @@ angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'De
 
 // Main controller
 // ------------------------------
-.controller('MainCtrl', ['$scope', '$stateParams', 'Auth', 'lists', '$http',
+.controller('MainCtrl', ['$scope', '$stateParams', 'Auth', 'lists', '$http', '$window',
 
 	// Main scope (used in views)
-	function($scope, $stateParams, Auth, lists, $http) {
-		
-		// array of lists
-		$scope.lists = lists.lists;
-		$scope.list = lists.lists[$stateParams.id];
+	function($scope, $stateParams, Auth, lists, $http, $window) {
 
-	  	// order by options
-		$scope.options = [{name: 'Custom Sort', value : null, reversed : false}, {name: 'A > Z', value : 'title', reversed : false}, {name: 'Z > A', value : 'title', reversed : true}, {name: 'Date', value : 'created_at', reversed : true}, {name: 'Speech', value : 'speech', reversed : true}];
-
-
-		// List functions
-		// ------------------------------
-
-		// Add list function
-		// Creates a new list
+		/* 	addList function 
+		 * 	creates new list
+		 *
+		*/
 		$scope.addList = function(){
-			// prevent empty titles
-			if(!$scope.title || $scope.title === '') { 
-				return;
-			}
 
+			// call factory function and pass list array param
 			lists.create({
-				title: $scope.title,
+				title: "List - " + new Date().toJSON().slice(0,10),
 				date: new Date().toJSON().slice(0,10),
+				words: []
 			});
 
 			// reset title
 			$scope.title = '';
+
+			// update to this list
+			$scope.list = $scope.lists[$scope.lists.length - 1];
 		};
 
+		/* 	deleteList function 
+		 * 	deletes list based on ID
+		 *
+		*/
 		$scope.deleteList = function(list) {
-			lists.delete($scope.list.id);							// delete in database
+			// confirm delete
+			var confirmDelete = confirm("Are you sure you want to delete this list?");
 
-			$scope.lists.splice($scope.lists.indexOf(list), 1);		// delete on cleint side
-			$scope.list.words.splice(0, $scope.list.words.length);	// delete all words
+			if (confirmDelete) {
+				lists.delete($scope.list.id);							// delete in database
+
+				$scope.lists.splice($scope.lists.indexOf(list), 1);		// delete on cleint side
+				$scope.list.words.splice(0, $scope.list.words.length);	// delete all words
+
+				// update current list selection
+				if ($scope.lists.length > 0) {
+					$scope.list = $scope.lists[0];
+				}
+				else {
+					$scope.list = undefined;
+				}
+			}
 		};
 
+		/* 	shareList function 
+		 * 	shares list based on ID
+		 *
+		*/
+		$scope.shareList = function(list) {
+			// load search page
+			$window.open('/#/public/' + list['hash_token']);
+		};
 
-		// Word functions
-		// ------------------------------
-
-		// Add word function
-		$scope.addWord = function(){
-
+		/* 	addWords functions
+		 *	add words to specific list
+		 *
+		*/ 
+		$scope.addWords = function(){
 
 			// split multiple words
 			var split = $scope.word.split(", ");
@@ -176,7 +224,6 @@ angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'De
 					// get data from API
 					$http.get(api_url)
 
-						// handle successful
 						.success(function (response) {
 
 							// if data found
@@ -187,7 +234,7 @@ angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'De
 									// meta
 									display: response.data[0]["groupResult"]["displayName"].replace("<b>", "").replace("</b>", ""),
 									date: new Date(),
-									speech: response.data[0]["dictionaryData"]["definitionData"][0]["wordForms"][0]["pos"],
+									speech: response.data[0]["dictionaryData"]["definitionData"][0]["pos"].toLowerCase(),
 									definitions: response.data[0]["dictionaryData"]["definitionData"][0]["meanings"]
 								})
 								.success(function(word) {
@@ -200,21 +247,92 @@ angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'De
 
 							$scope.word = '';
 						}) 
-				})
-
+			})
 		};
 
-		// Delete word from list
+		/*	deleteWord function
+		 *	delete word from list
+		 *
+		*/
 		$scope.deleteWord = function(word_id, word) {
 			lists.deleteWord($scope.list.id, word_id);						// delete from database
 			$scope.list.words.splice($scope.list.words.indexOf(word), 1);	// delete on cleint side
 		};
 
+		/* 	deleteList function 
+		 * 	deletes list based on ID
+		 *
+		*/
+		$scope.updateList = function(index) {
+			// update on client side
+			$scope.list = $scope.lists[index];
+			//$scope.lists[list].title = $scope.list.title;
+		};
+
+		/* 	updateSort function 
+		 * 	updates sort options when element is dragged
+		 *
+		*/
+		$scope.updateSort = function(index) {
+			if (index === undefined) {
+				var index = 0;
+			}
+			// set custom order
+			$scope.selectedOrder = $scope.sortOptions[index];
+		}
+
+		// on page load
+		// ------------------------------------
+		// all lists
+		$scope.lists = lists.lists;
+
+		// default list used on search page
+		$scope.list = $scope.lists[0];
+
+		// order by options
+		$scope.sortOptions = [{name: 'Custom Sort', value : null, reversed : false}, {name: 'A > Z', value : 'title', reversed : false}, {name: 'Z > A', value : 'title', reversed : true}, {name: 'Date', value : 'date', reversed : true}, {name: 'Speech', value : 'speech', reversed : true}];
+
+		// set default order
+		$scope.selectedOrder = $scope.sortOptions[3];
 
 	}
 
 ])
 
+
+
+// Main controller
+// ------------------------------
+.controller('PublicCtrl', ['$scope', '$stateParams', 'Auth', 'lists', '$http',
+
+	// Main scope (used in views)
+	function($scope, $stateParams, Auth, lists, $http) {
+
+		/* 	updateSort function 
+		 * 	updates sort options when element is dragged
+		 *
+		*/
+		$scope.updateSort = function(index) {
+			if (index === undefined) {
+				var index = 0;
+			}
+			// set custom order
+			$scope.selectedOrder = $scope.sortOptions[index];
+		}
+
+		// on page load
+		// ------------------------------------
+		// get this public list
+		$scope.list = lists.lists['data'];
+
+		// order by options
+		$scope.sortOptions = [{name: 'Custom Sort', value : null, reversed : false}, {name: 'A > Z', value : 'title', reversed : false}, {name: 'Z > A', value : 'title', reversed : true}, {name: 'Date', value : 'created_at', reversed : true}, {name: 'Speech', value : 'speech', reversed : true}];
+
+		// set default order
+		$scope.selectedOrder = $scope.sortOptions[3];
+	}
+
+])
 
 // Search controller
 // Static client side if users are not logged in
@@ -261,7 +379,6 @@ angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'De
 
 							// handle successful
 							.success(function (response) {
-
 								// if data found
 								if (response.data) {
 									// push new word to array
@@ -270,9 +387,11 @@ angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'De
 										// meta
 										display: response.data[0]["groupResult"]["displayName"].replace("<b>", "").replace("</b>", ""),
 										date: new Date(),
-										speech: response.data[0]["dictionaryData"]["definitionData"][0]["wordForms"][0]["pos"],
+										speech: response.data[0]["dictionaryData"]["definitionData"][0]["pos"].toLowerCase(),
 										definitions: response.data[0]["dictionaryData"]["definitionData"][0]["meanings"]
 									});
+									// clear word
+									$scope.word = "";
 								}
 								else {
 									console.log('error with response');
@@ -282,6 +401,7 @@ angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'De
 								$window.location.assign('/#/search');
 
 								$scope.word = '';
+								$('#search-word').val("");
 							}) 
 					})
 				}
@@ -301,6 +421,9 @@ angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'De
 
 			// reset title
 			$scope.title = '';
+
+			// update to this list
+			$scope.list = $scope.lists[$scope.lists.length - 1];
 		};
 
 		/* 	deleteList function 
@@ -356,16 +479,16 @@ angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'De
 									// meta
 									display: response.data[0]["groupResult"]["displayName"].replace("<b>", "").replace("</b>", ""),
 									date: new Date(),
-									speech: response.data[0]["dictionaryData"]["definitionData"][0]["wordForms"][0]["pos"],
+									speech: response.data[0]["dictionaryData"]["definitionData"][0]["pos"].toLowerCase(),
 									definitions: response.data[0]["dictionaryData"]["definitionData"][0]["meanings"]
 								});
+								// clear word
+								$scope.word = "";
 							}
 							else {
 								console.log('Error with response');
 							}
-						 
 				})
-
 			})
 		};
 
@@ -387,6 +510,17 @@ angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'De
 			//$scope.lists[list].title = $scope.list.title;
 		};
 
+		/* 	updateSort function 
+		 * 	updates sort options when element is dragged
+		 *
+		*/
+		$scope.updateSort = function(index) {
+			if (index === undefined) {
+				var index = 0;
+			}
+			// set custom order
+			$scope.selectedOrder = $scope.sortOptions[index];
+		}
 
 		// on page load
 		// ------------------------------------
