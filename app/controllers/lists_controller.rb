@@ -10,6 +10,10 @@ class ListsController < ApplicationController
     respond_with List.create(list_params.merge(user_id: current_user.id))
   end
 
+  def update
+    respond_with List.find(params[:id]).update(list_params.merge(user_id: current_user.id))
+  end
+
   def show
     respond_with List.find(params[:id])
   end

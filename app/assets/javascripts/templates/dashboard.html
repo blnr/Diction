@@ -3,7 +3,7 @@
   <div class="row">
 
     <form>
-      <input ng-model="list.title" value="{{lists[0]['title']}}">
+      <input ng-change="updateList(list)" ng-model="list.title" value="{{lists[0]['title']}}">
     </form>
 
     <div class="dropdown display-inline">
@@ -19,7 +19,27 @@
     <!-- float right -->
     <section class="pull-right">
 
-      <!-- hidden section -->
+      <div class="dropdown display-inline">
+        <button type="button" class="button-icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+         List Options: <span class="caret" aria-hidden="true"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li>
+            <a ng-click="addList()">New</a>
+          </li>
+          <li>
+            <a ng-click="deleteList(list)">Delete</a>
+          </li>
+          <li>
+            <a ng-click="shareList(list)">Share</a>
+          </li>
+          <li>
+            <a ng-click="#">Information</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- hidden section
       <section class="list-options display-inline">
         <button ng-click="addList()" type="button" class="button-icon">
           <span>New</span>
@@ -27,18 +47,15 @@
         <button ng-click="deleteList(list)" type="button" class="button-icon">
           <span>Delete</span>
         </button>
-        <button ng-click="shareList(list)" type="button" class="button-icon">
+        <button type="button" class="button-icon">
           <span>Share</span>
         </button>
         <button type="button" class="button-icon">
           <span>Information</span>
         </button>
       </section>
-      <!-- / hidden -->
+       / hidden -->
 
-      <button type="button" class="button-icon" id="list-options-click">
-        <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
-      </button>
     </section>
     <!-- / right -->
 
@@ -55,7 +72,7 @@
 
     <!-- add word -->
     <form ng-submit="addWords()">
-      <input type="text" ng-model="$parent.word" id="search-word" placeholder="disdain, dismal, aloof" autofocus="true"></input>
+      <input type="text" ng-model="$parent.word" id="search-word" placeholder="Add words..." autofocus="true"></input>
       <button type="button" class="button-icon">
         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
       </button>

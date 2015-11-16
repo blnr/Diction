@@ -13,7 +13,7 @@ class List < ActiveRecord::Base
 		# generate random hash token for URL sharing
 		def generate_hash_token
 			begin
-				self.hash_token = SecureRandom.hex
+				self.hash_token = (0...5).map { (65 + rand(26)).chr }.join
 			end while self.class.exists?(hash_token: hash_token)
 		end
 end

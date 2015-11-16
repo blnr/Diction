@@ -1,79 +1,85 @@
 
-<h2>Join Diction today.</h2>
-<p>Diction is a simple tool for creating and sharing vocabulary lists.</p>
+<div ng-controller="AuthCtrl">
 
-<hr class="dash">
+	<h2>Join Diction today.</h2>
+	<p>Diction is a simple, <a href="http://github.com/kylesb/lexnr">open-source</a> web application for creating and sharing vocabulary lists.</p>
 
-<div class="row">
+	<hr class="dash">
 
-	<div class="col-md-6 pull-left">
+	<div class="row">
 
-		<form ng-submit="register()">
-			<table id="register-table">
-				<tr>
-					<td><span>Full name:</span></td>
-				</tr>
-				<tr>
-					<td>
-						<input type="text" class="splash-input form-search" required autofocus></input>
-					</td>
-				</tr>
-				<tr>
-					<td>Email:</td>
-				</tr>
-				<tr>
-					<td>
-						<input class="splash-input form-search" type="email" required>
-					</td>
-				</tr>
-				<tr>
-					<td>Password:</td>
-				</tr>
-				<tr>
-					<td>
-						<input class="splash-input form-search" type="password" required>
-					</td>
-				</tr>
-			</table>
+		<div class="col-md-6 pull-left">
 
-		</form>
+			<form ng-submit="register()">
+				<table id="register-table">
+					<tr>
+						<td><span>Full name:</span></td>
+					</tr>
+					<tr>
+						<td>
+							<input ng-model="user.fullName" type="text" class="splash-input form-search" required autofocus></input>
+						</td>
+					</tr>
+					<tr>
+						<td>Email:</td>
+					</tr>
+					<tr>
+						<td>
+							<input ng-model="user.email" class="splash-input form-search" type="email" required>
+						</td>
+					</tr>
+					<tr>
+						<td>Password:</td>
+					</tr>
+					<tr>
+						<td>
+							<input ng-model="user.password" class="splash-input form-search" type="password" required>
+						</td>
+					</tr>
+					<tr>
+						<td><button type="button" ng-click="register()" class="button-icon pull-right">Sign up</button></td>
+					</tr>
+				</table>
+
+			</form>
+		</div>
+
+		<div class="col-md-6 pull-right register-benefits-container">
+			<p>Registeration benefits:</p>
+
+			<ul>
+				<li>Save and access lists from the cloud.</li>
+				<li>Share an unlimited amount of lists.</li>
+				<li>Edit, update, and delete shared lists.</li>
+			</ul>
+		</div>
 	</div>
 
-	<div class="col-md-6 pull-right register-benefits-container">
-		<p>Registeration benefits:</p>
+	<!--
+	<form ng-submit="register()" id="create-account-form">
 
-		<ul>
-			<li>Save and access your lists from the cloud.</li>
-			<li>Share an unlimited amount of lists.</li>
-			<li>Ability to edit/update shared lists.</li>
-		</ul>
+	<div class="input class="form-control"-group">
+	    <label>First name:</label>
+	    <input class="form-control" class="name input class="form-control"" type="text" class="form-control" ng-model="user.firstname" autofocus required>
 	</div>
+
+	<div class="input class="form-control"-group">
+	    <label>Last name:</label>
+	    <input class="form-control" class="name input class="form-control"" type="text" class="form-control" ng-model="user.lastname" required>
+	</div>
+
+	<div class="input class="form-control"-group">
+	    <label>Email:</label>
+	    <input class="form-control" class="input class="form-control"" type="email" class="form-control" ng-model="user.email" required>
+	</div>
+
+	<div class="input class="form-control"-group">
+	    <label>Password:</label>
+	    <input class="form-control" class="input class="form-control"" type="password" class="form-control" ng-model="user.password" required>
+	</div>
+
+	<label class="text grey" style="margin: 15px 0 0 0;">* All fields required</label>
+
+	    <input class="form-control" class="input class="form-control" text" id="submit-button" type="submit" class="btn btn-default" value="Register">
+	</form>-->
 </div>
-
-<!--
-<form ng-submit="register()" id="create-account-form">
-
-<div class="input class="form-control"-group">
-    <label>First name:</label>
-    <input class="form-control" class="name input class="form-control"" type="text" class="form-control" ng-model="user.firstname" autofocus required>
-</div>
-
-<div class="input class="form-control"-group">
-    <label>Last name:</label>
-    <input class="form-control" class="name input class="form-control"" type="text" class="form-control" ng-model="user.lastname" required>
-</div>
-
-<div class="input class="form-control"-group">
-    <label>Email:</label>
-    <input class="form-control" class="input class="form-control"" type="email" class="form-control" ng-model="user.email" required>
-</div>
-
-<div class="input class="form-control"-group">
-    <label>Password:</label>
-    <input class="form-control" class="input class="form-control"" type="password" class="form-control" ng-model="user.password" required>
-</div>
-
-<label class="text grey" style="margin: 15px 0 0 0;">* All fields required</label>
-
-    <input class="form-control" class="input class="form-control" text" id="submit-button" type="submit" class="btn btn-default" value="Register">
-</form>-->

@@ -31,13 +31,20 @@
 						</div>
 					</div>
 
-					<div class="col-md-6 pull-right padding-none">
+					<div ng-controller="NavCtrl" class="col-md-6 pull-right padding-none" style="margin: 20px 0;">
+
 						<button type="button" class="button-icon pull-right" id="nav-display-click">
 							<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
 						</button>
 
+						<!-- loggin in -->
+						<nav ng-show="signedIn()" ng-controller="NavCtrl" class="pull-right" style="margin-right: 10px;">
+							<p><a ng-click="logout()">Log Out</a>{{user.full_name}}</p>
+						</nav> 
+						<!-- / logged -->
+
 						<!-- guest user -->
-						<nav ng-hide="signedIn()" id="guest-user" class="pull-right" ng-controller="AuthCtrl">
+						<nav ng-controller="AuthCtrl" ng-hide="signedIn()" id="guest-user" class="pull-right">
 							<div id="nav-login">
 
 								<form id="form-login" ng-submit="login()">
@@ -55,9 +62,9 @@
 											<td><input type="password" class=full-width ng-model="user.password" required></td>
 										</tr>
 										<tr>
-											<td>
-												<input class="pull-left" type="submit" id="submit" class="text" value="Log In">
-												<span class="pull-right">[ create account ]</span>
+											<td style="margin: 10px 0; display: block;">
+												<button class="pull-left button-icon" type="submit" id="submit" class="text" value="Log In">Log In</button>
+												<button class="pull-right button-icon"><span class="pull-right">[ <a href="#/register">create account</a> ]</span></button>
 											</td>
 										</tr>
 									</table>
@@ -67,13 +74,6 @@
 						</nav>
 						<!-- / guest -->
 					</div>
-
-					<!-- loggin in -->
-					<nav ng-show="signedIn()" ng-controller="NavCtrl">
-						<a ng-click="logout()">Log Out</a>
-						<span>{{ user.firstname }}</span>
-					</nav> 
-					<!-- / logged -->
 
 					<!-- nav user 
 					<nav id="nav-user">
@@ -86,7 +86,7 @@
 			</header>
 			<!-- /header -->
 
-		<div class="container-fluid" id="page-wrap">
+		<div id="page-wrap">
 
 			<!-- render template -->
 			<ui-view id="content">

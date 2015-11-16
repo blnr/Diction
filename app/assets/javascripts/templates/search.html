@@ -19,7 +19,27 @@
     <!-- float right -->
     <section class="pull-right">
 
-      <!-- hidden section -->
+      <div class="dropdown display-inline">
+        <button type="button" class="button-icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+         List Options: <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li>
+            <a ng-click="addList()">New</a>
+          </li>
+          <li>
+            <a ng-click="deleteList(list)">Delete</a>
+          </li>
+          <li>
+            <a ng-click="updateList($index)">Share</a>
+          </li>
+          <li>
+            <a ng-click="updateList($index)">Information</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- hidden section
       <section class="list-options display-inline">
         <button ng-click="addList()" type="button" class="button-icon">
           <span>New</span>
@@ -34,11 +54,8 @@
           <span>Information</span>
         </button>
       </section>
-      <!-- / hidden -->
+       / hidden -->
 
-      <button type="button" class="button-icon" id="list-options-click">
-        <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
-      </button>
     </section>
     <!-- / right -->
 
@@ -63,7 +80,11 @@
     <!-- end add -->
 
     <!-- float right -->
-    <section class="pull-right">
+    <section class="pull-right word-options-container">
+
+      <button type="button" class="button-icon" id="word-options-click">
+        <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
+      </button>
 
       <!-- hidden section -->
       <section class="word-options display-inline">
@@ -73,7 +94,7 @@
           <!-- sort options -->
           <div class="option-choice">
             <div class="dropdown display-inline">
-              <button type="button" class="button-icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <button type="button" class="button-icon dropdown-toggle filter-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -82,10 +103,6 @@
             </div>
           </div>
         </div>
-
- 
-
-
 
         <div class="option-choice">
           <!-- collapse -->
@@ -98,9 +115,6 @@
       </section>
       <!-- / hidden -->
 
-      <button type="button" class="button-icon" id="word-options-click">
-        <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
-      </button>
     </section>
     <!-- / right -->
 

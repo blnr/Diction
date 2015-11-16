@@ -119,12 +119,10 @@ angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'De
 		  });
 		};
 
-		/* update list
+		// update list
 		o.update = function(id, post) {
-		  return $http.put('/lists/' + id + '.json', post).success(function(data){
-		    o.lists.push(data);
-		  });
-		}*/
+			$http.put('/lists/' + id + '.json', post);
+		}
 
 		// delete list
 		o.delete = function(id) {
@@ -259,14 +257,23 @@ angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'De
 			$scope.list.words.splice($scope.list.words.indexOf(word), 1);	// delete on cleint side
 		};
 
-		/* 	deleteList function 
-		 * 	deletes list based on ID
+		/* 	updateList function 
+		 * 	updates list based on ID
 		 *
 		*/
-		$scope.updateList = function(index) {
-			// update on client side
-			$scope.list = $scope.lists[index];
-			//$scope.lists[list].title = $scope.list.title;
+		$scope.updateList = function(list) {
+			// prevent put request on list change/selection
+			if (list['title'] == undefined) {
+				// only update on client side
+				$scope.list = $scope.lists[list];
+			}
+			else {
+				// update on client side
+				$scope.list = $scope.lists[$scope.lists.indexOf(list)];
+
+				// call factory function and pass list array param
+				lists.update($scope.list.id, angular.toJson($scope.list));
+			}
 		};
 
 		/* 	updateSort function 
@@ -290,7 +297,7 @@ angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'De
 		$scope.list = $scope.lists[0];
 
 		// order by options
-		$scope.sortOptions = [{name: 'Custom Sort', value : null, reversed : false}, {name: 'A > Z', value : 'title', reversed : false}, {name: 'Z > A', value : 'title', reversed : true}, {name: 'Date', value : 'date', reversed : true}, {name: 'Speech', value : 'speech', reversed : true}];
+		$scope.sortOptions = [{name: 'Custom Sort', value : null, reversed : false}, {name: 'A > Z', value : 'title', reversed : false}, {name: 'Z > A', value : 'title', reversed : true}, {name: 'Date', value : 'created_at', reversed : true}, {name: 'Speech', value : 'speech', reversed : true}];
 
 		// set default order
 		$scope.selectedOrder = $scope.sortOptions[3];

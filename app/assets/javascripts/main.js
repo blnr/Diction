@@ -6,6 +6,13 @@ $(document).on("click", "#nav-display-click", function() {
 
     $("#guest-user").toggle();
 
+    if ($("#guest-user").is(":visible")) {
+        $("#content").css("margin", "295px auto");
+    }
+    else {
+        $("#content").css("margin", "165px auto");        
+    }
+
     //$('.dropdown-toggle').dropdown();
 
     //$("#page-overlay, #nav-login-container").click(function () {

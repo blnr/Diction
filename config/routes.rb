@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # authenication
   devise_for :users
 
-  resources :lists, only: [:create, :index, :show, :destroy] do
+  resources :lists, only: [:create, :index, :show, :update, :destroy] do
     resources :words, only: [:create, :index, :show, :destroy] do
     end
   end

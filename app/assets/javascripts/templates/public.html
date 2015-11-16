@@ -1,4 +1,4 @@
-<div ng-controller="PublicCtrl">
+<div ng-controller="PublicCtrl" style="margin-top: -30px;">
 
   <div class="row">
     <div class="col-md-6 pull-left">
@@ -9,15 +9,16 @@
 	    	</div>
 	    	{{ list.description }}
 	    </p>
-	</div>
-	<div class="col-md-6 pull-right">
-    	<p class="pull-right">Last updated: {{ list.created_at }}</p>
     </div>
   </div>
 
   <hr class="dash">
 
   <div class="row" ng-if="list">
+
+    <div class="col-md-6 pull-left">
+      <p class="pull-left">Last updated: {{ list.created_at }}</p>
+    </div>
 
     <!-- float right -->
     <section class="pull-right">
@@ -69,7 +70,7 @@
     <!-- / empty list -->
 
     <!-- list all words in list -->
-    <div ng-if="list.words.length > 0" id="words-container" style="margin-top: -25px" ui-tree>
+    <div ng-if="list.words.length > 0" id="words-container" ui-tree>
 
       <ol ui-tree-nodes="" ng-model="list.words">
 
@@ -91,7 +92,7 @@
 
           </section>
 
-          <p ng-show="date">Created at: {{word.date}}</p>
+          <p ng-show="date">Created at: {{word.created_at}}</p>
 
         </li>
       </ol>
