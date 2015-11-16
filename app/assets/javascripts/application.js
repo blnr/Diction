@@ -2,7 +2,7 @@
 //= require_tree .
 
 
-angular.module('lexnr', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'Devise', 'angular-loading-bar', 'ui.bootstrap'])
+angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'Devise', 'angular-loading-bar', 'ui.bootstrap'])
 
 // Set routing/configuration
 // ------------------------------
