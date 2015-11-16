@@ -1,12 +1,12 @@
-# Lexnr
+# diction.help
 
-A SPA to search and create vocabulary lists from Google's dictionary data (define: x). 
+An AngularJS and Rails single page application for creating and sharing vocabulary lists. 
 
-http://lexnr.com
+http://diction.help
 
 ## Usage
 
-All index searches are temperary sessions on the client-side, which means if you refresh the page or navigate away, the data will be lost. In order to save and share lists, you must log-in or create an account. 
+All index searches are temperary sessions on the client-side, which means if you refresh the page, the data will be lost. In order to save and share lists, you must log-in or create an account. 
 
 * Search and add multiple words simultaneously through comma seperation: epitome, fallacy, diction. 
 * Filter words by name, speech, or definition keywords (e.g. adj, noun, 'dismal').
@@ -23,11 +23,7 @@ Back-end:	Ruby on Rails 4.2
 
 To get up and running locally...
 
-> git clone https://github.com/kylesb/lexnr.git<br>
+> git clone https://github.com/kylesb/diction.help.git<br>
 > bundle update<br>
 > rake db:migrate<br>
 > rails s
-
-## Contact
-
-If you have any comments, suggestions, or bug reports - feel free to send me an email: belanger.kyle@gmail.com
