@@ -4,14 +4,15 @@ An AngularJS and Rails single page application for creating and sharing vocabula
 
 http://diction.help
 
-## Usage
+## How to use
 
 All index searches are temperary sessions on the client-side, which means if you refresh the page, the data will be lost. In order to save and share lists, you must log-in or create an account. 
 
 Features:
 
-* Search and add multiple words simultaneously through comma seperation: epitome, fallacy, diction. 
-* Filter words by name, speech, or definition keywords (e.g. adj, noun, 'dismal').
+* Create, save, and share vocabulary lists
+* Search for multiple words simultaneously through comma seperation: epitome, fallacy, aloof. 
+* Filter words by title, speech, or definition keywords (e.g. adj, noun, 'aloof').
 * Configure word order through drag and drop using the 'custom order' sort option.
 
 
