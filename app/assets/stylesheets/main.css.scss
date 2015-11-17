@@ -332,7 +332,9 @@ input:focus {
 
 .register-benefits-container {
     border-left: thin dotted grey;
-    height: 350px;
+    margin: 0 75px;
+    padding: 0 25px;
+    height: 220px;
 }
 
 .h3 {
@@ -355,6 +357,23 @@ input:focus {
 
 #word-options-click {
 	float: right;
+}
+
+.register-container {
+	width: 1200px;
+}
+
+.register-form-container {
+	width: 650px;
+}
+
+.register-form-input {
+	width: 630px;
+}
+
+.register-submit {
+    margin: 20px 170px;
+    width: 100px;
 }
 
 

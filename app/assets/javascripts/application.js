@@ -548,10 +548,10 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 
 // NAV controller
 // ------------------------------
-.controller('NavCtrl', ['$scope', 'Auth', '$window',
+.controller('NavCtrl', ['$scope', 'Auth', '$window', 'lists',
 
 	// Main scope (used in views)
-	function($scope, Auth, $window) {
+	function($scope, Auth, $window, lists) {
 
 		$scope.signedIn = Auth.isAuthenticated;
 		$scope.logout = Auth.logout;
@@ -562,6 +562,13 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 
 		$scope.$on('devise:new-registration', function (e, user){
 			$scope.user = user;
+
+			// create a default empty list
+			lists.create({
+				title: "List - " + new Date().toJSON().slice(0,10),
+				date: new Date().toJSON().slice(0,10),
+				words: []
+			});
 		});
 
 		$scope.$on('devise:login', function (e, user){
@@ -570,7 +577,7 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 
 		$scope.$on('devise:logout', function (e, user){
 			$scope.user = {};
-			$window.location.assign('/#/home');		// redirect to home page
+			$window.location.assign('http://diction.help');		// redirect to home page
 		});
 	}
 

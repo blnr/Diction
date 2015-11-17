@@ -6,9 +6,9 @@
 
 	<hr class="dash">
 
-	<div class="row">
+	<div class="row register-container">
 
-		<div class="col-md-6 pull-left">
+		<div class="register-form-container pull-left">
 
 			<form ng-submit="register()">
 				<table id="register-table">
@@ -17,7 +17,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input ng-model="user.fullName" type="text" class="splash-input form-search" required autofocus></input>
+							<input ng-model="user.full_name" class="splash-input register-form-input" type="text" autofocus required>
 						</td>
 					</tr>
 					<tr>
@@ -25,7 +25,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input ng-model="user.email" class="splash-input form-search" type="email" required>
+							<input ng-model="user.email" class="splash-input register-form-input" type="email" required>
 						</td>
 					</tr>
 					<tr>
@@ -33,18 +33,18 @@
 					</tr>
 					<tr>
 						<td>
-							<input ng-model="user.password" class="splash-input form-search" type="password" required>
+							<input ng-model="user.password" class="splash-input register-form-input" type="password" required>
 						</td>
 					</tr>
 					<tr>
-						<td><button type="button" ng-click="register()" class="button-icon pull-right">Sign up</button></td>
+						<td><button type="button" ng-click="register()" class="button-icon pull-right register-submit">Sign up</button></td>
 					</tr>
 				</table>
 
 			</form>
 		</div>
 
-		<div class="col-md-6 pull-right register-benefits-container">
+		<div class="pull-right register-benefits-container">
 			<p>Registeration benefits:</p>
 
 			<ul>

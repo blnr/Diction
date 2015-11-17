@@ -153,6 +153,12 @@
               <div ng-repeat="w in word.definitions">
                 <li role="definition">{{ w.meaning }}</li>
                 <p class="example" ng-if="w.examples[0] !== nil">{{ w.examples[0] }}</p>
+                <!-- submeaning -->
+                <div ng-if="w.submeanings" ng-repeat="sub in w.submeanings">
+                  <div ng-if="$index < 1">
+                    <li role="definition">{{ sub.meaning }}</li>
+                    <p class="example">{{ sub.examples[0] }}</p>
+                  </div>
               </div>
             </ol>
 
