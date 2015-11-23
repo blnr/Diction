@@ -1,7 +1,7 @@
 class List < ActiveRecord::Base
 	belongs_to :user
 	has_many :words, dependent: :delete_all
-  	validates_uniqueness_of :title, scope: :user_id
+  	#validates_uniqueness_of :title, scope: :user_id
  	before_create :generate_hash_token
 
 	def as_json(options = {})

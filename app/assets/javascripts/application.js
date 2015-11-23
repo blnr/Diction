@@ -315,18 +315,6 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 	// Main scope (used in views)
 	function($scope, $stateParams, Auth, lists, $http) {
 
-		/* 	updateSort function 
-		 * 	updates sort options when element is dragged
-		 *
-		*/
-		$scope.updateSort = function(index) {
-			if (index === undefined) {
-				var index = 0;
-			}
-			// set custom order
-			$scope.selectedOrder = $scope.sortOptions[index];
-		}
-
 		// on page load
 		// ------------------------------------
 		// get this public list
@@ -336,7 +324,7 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 		$scope.sortOptions = [{name: 'Custom Sort', value : null, reversed : false}, {name: 'A > Z', value : 'title', reversed : false}, {name: 'Z > A', value : 'title', reversed : true}, {name: 'Date', value : 'created_at', reversed : true}, {name: 'Speech', value : 'speech', reversed : true}];
 
 		// set default order
-		$scope.selectedOrder = $scope.sortOptions[3];
+		//$scope.selectedOrder = $scope.sortOptions[3];
 	}
 
 ])
@@ -389,7 +377,7 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 								// if data found
 								if (response.data) {
 									// push new word to array
-									$scope.lists[0].words.push({
+									$scope.lists[0].words.unshift({
 										title: response.data[0]["groupResult"]["query"],
 										// meta
 										display: response.data[0]["groupResult"]["displayName"].replace("<b>", "").replace("</b>", ""),
@@ -481,7 +469,7 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 							// if data found
 							if (response.data) {
 								// push new word to array
-								$scope.list.words.push({
+								$scope.list.words.unshift({
 									title: response.data[0]["groupResult"]["query"],
 									// meta
 									display: response.data[0]["groupResult"]["displayName"].replace("<b>", "").replace("</b>", ""),
@@ -517,6 +505,36 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 			//$scope.lists[list].title = $scope.list.title;
 		};
 
+		/* 	shareList function 
+		 * 	shares public list
+		 *
+		*/
+		$scope.shareList = function(){
+
+			// post list to server
+			lists.create({
+				title: $scope.list['title'],
+				date: new Date().toJSON().slice(0,10),
+				words: []
+			})
+			.success(function(list) {
+				// get returned list ID, add it to client list
+				$scope.list['id'] 		= list['id'];
+				$scope.list['hash_token'] = list['hash_token']; 
+
+				angular.forEach($scope.list.words, function(word, key){
+					// Add to server list
+					lists.addWord($scope.list.id, angular.toJson(word));
+				})
+
+				// load search page
+				$window.open('/#/public/' + $scope.list['hash_token']);			
+
+			});
+
+
+		};
+
 		/* 	updateSort function 
 		 * 	updates sort options when element is dragged
 		 *
@@ -541,7 +559,7 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 		$scope.sortOptions = [{name: 'Custom Sort', value : null, reversed : false}, {name: 'A > Z', value : 'title', reversed : false}, {name: 'Z > A', value : 'title', reversed : true}, {name: 'Date', value : 'date', reversed : true}, {name: 'Speech', value : 'speech', reversed : true}];
 		
 		// set default order
-		$scope.selectedOrder = $scope.sortOptions[3];
+		//$scope.selectedOrder = $scope.sortOptions[3];
 	}
 ])
 

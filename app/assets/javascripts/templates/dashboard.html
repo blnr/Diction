@@ -138,7 +138,7 @@
       <ol ui-tree-nodes="" ng-model="list.words">
 
         <!-- words in list -->
-        <li ng-mousedown="updateSort()" ng-repeat="word in list.words | orderBy:selectedOrder.value:selectedOrder.reversed | filter:searchText" class='word word-container' id="word-{{word.id}}" ui-tree-node>
+        <li ng-repeat="word in list.words | orderBy:selectedOrder.value:selectedOrder.reversed | filter:searchText" class='word word-container' id="word-{{word.id}}" ui-tree-node>
 
           <!-- delete word -->
           <button class="delete-word pull-right button-icon" ng-click="deleteWord(word.id, word)" type="button" class="button-icon">
