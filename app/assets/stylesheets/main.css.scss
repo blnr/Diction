@@ -22,7 +22,7 @@ body {
 }
 
 
-p, span {
+p, span, .input-display {
 	font-size: 16px;
 	font-family: "Times New Roman", serif;
 }
@@ -180,7 +180,7 @@ nav[role="base"] {
 }
 
 .word-title {
-	color: #516CAC;
+	color: #1E1F20;
 }
 
 .word-minimal {
@@ -374,6 +374,16 @@ input:focus {
 .register-submit {
     margin: 20px 170px;
     width: 100px;
+}
+
+.input-display {
+	background-color: transparent;
+	border: none;
+	min-width: 75%;
+}
+
+.input-display:hover {
+    border: thin dotted #8FB1FF;
 }
 
 

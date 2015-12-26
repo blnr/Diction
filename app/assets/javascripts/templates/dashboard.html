@@ -150,12 +150,20 @@
 
           <section id="minimal" ng-hide="minimal">
 
-            <p class="speech">{{ word.speech }}</p>
+            <input class="speech input-display" value="{{ word.speech }}">
 
             <ol class="definitions">
               <div ng-repeat="w in word.definitions">
-                <li role="definition">{{ w.meaning }}</li>
-                <p class="example" ng-if="w.examples[0] !== nil">{{ w.examples[0] }}</p>
+                <li role="definition"><input class="input-display" value="{{ w.meaning }}"></li>
+                <input class="input-display example" ng-if="w.examples[0] !== nil" value="{{ w.examples[0] }}">
+                <!-- submeaning -->
+                <div ng-if="w.submeanings" ng-repeat="sub in w.submeanings">
+                  <div ng-if="$index < 1">
+                    <li role="definition">
+                      <input class="input-display" value="{{ sub.meaning }}">
+                    </li>
+                    <input class="input-display example" value="{{ sub.examples[0] }}">
+                  </div>
               </div>
             </ol>
 
