@@ -2,7 +2,12 @@
 
   <div class="row">
     <div class="col-md-6 pull-left">
-	    <p class="h3">{{ list.title }}</p>
+	    <p class="h3" title="This is a public accessible link">
+        {{ list.title }}
+        <small class="margin-left-right-10px">[ 
+          <span class="background-aliceBlue">public</span> 
+        ]</small>
+      </p>
 	    <p>
 	    	<div ng-if="!list.description">
 	    		No descripton available...
