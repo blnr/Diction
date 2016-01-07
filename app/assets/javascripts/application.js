@@ -4,8 +4,9 @@
 
 angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', 'Devise', 'angular-loading-bar', 'ui.bootstrap'])
 
-// Set routing/configuration
-// ------------------------------
+/* 	Routing configuration for various 'states'
+ *
+*/
 .config(['$stateProvider', '$urlRouterProvider',
 
 	// Set state providers
@@ -15,7 +16,7 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 		.state('home', {
 		  url: '/home',
 		  templateUrl: 'home.html',
-		  controller: 'SearchCtrl',
+		  controller: 'GuestCtrl',
 	      onEnter: ['$state', 'Auth', function($state, Auth) {
 	        Auth.currentUser().then(function (){
 	          $state.go('dashboard');
@@ -27,7 +28,7 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 	    .state('search', {
 	      url: '/search',
 	      templateUrl: 'search.html',
-	      controller: 'SearchCtrl',
+	      controller: 'GuestCtrl',
 	      onEnter: ['$state', 'Auth', function($state, Auth) {
 	        Auth.currentUser().then(function (){
 	          $state.go('dashboard');
@@ -51,7 +52,7 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 		.state('dashboard', {
 		  url: '/dashboard',
 		  templateUrl: 'dashboard.html',
-		  controller: 'MainCtrl',
+		  controller: 'UserCtrl',
 		  resolve: {
 			  listPromise: ['lists', function(lists){
 			    return lists.getAll();
@@ -76,9 +77,10 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 ])
 
 
-// lists factory
-// Factories are used to organize and share code across the app.
-// ------------------------------
+/* 	Lists factory
+ * 	all HTTP post, get requests for list and word objects from the server
+ *
+*/
 .factory('lists', ['$http', '$state',
 
 	function($http, $state){
@@ -144,9 +146,11 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 ])
 
 
-// Main controller
-// ------------------------------
-.controller('MainCtrl', ['$scope', '$stateParams', 'Auth', 'lists', '$http', '$window',
+/* 	UserCtrl controller 
+ * 	User controller for dashboard access, allows users to CRUD items and lists
+ *
+*/
+.controller('UserCtrl', ['$scope', '$stateParams', 'Auth', 'lists', '$http', '$window',
 
 	// Main scope (used in views)
 	function($scope, $stateParams, Auth, lists, $http, $window) {
@@ -217,10 +221,10 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 			angular.forEach(split, function(split, key){
 
 				// API URL
-				var api_url = "https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query=" + split;
+				var google_api_url = "https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query=" + split;
 
 					// get data from API
-					$http.get(api_url)
+					$http.get(google_api_url)
 
 						.success(function (response) {
 
@@ -308,8 +312,10 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 
 
 
-// Main controller
-// ------------------------------
+/* 	Public Controller 
+ * 	controller for publically accessible lists
+ *
+*/
 .controller('PublicCtrl', ['$scope', '$stateParams', 'Auth', 'lists', '$http',
 
 	// Main scope (used in views)
@@ -329,10 +335,11 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 
 ])
 
-// Search controller
-// Static client side if users are not logged in
-// ------------------------------
-.controller('SearchCtrl', ['$scope', '$stateParams', 'Auth', 'lists', '$http', '$window',
+/* 	Guest Controller 
+ * 	controller for static clientside for guest users
+ *
+*/
+.controller('GuestCtrl', ['$scope', '$stateParams', 'Auth', 'lists', '$http', '$window',
 
 	// Main scope (used in views)
 	function($scope, $stateParams, Auth, lists, $http, $window) {
@@ -367,10 +374,10 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 				angular.forEach(split, function(split, key){
 
 					// API URL
-					var api_url = "https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query=" + split;
+					var google_api_url = "https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query=" + split;
 
 						// get data from API
-						$http.get(api_url)
+						$http.get(google_api_url)
 
 							// handle successful
 							.success(function (response) {
@@ -452,16 +459,16 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 		$scope.addWords = function(){
 
 			// split multiple words
-			var split = $scope.word.split(", ");
+			var query = $scope.word.split(", ");
 
 			// loop each word
-			angular.forEach(split, function(split, key){
+			angular.forEach(query, function(words, key){
 
 				// API URL
-				var api_url = "https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query=" + split;
+				var google_api_url = "https://www.googleapis.com/scribe/v1/research?key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&dataset=dictionary&dictionaryLanguage=en&query=" + words;
 
 					// get data from API
-					$http.get(api_url)
+					$http.get(google_api_url)
 
 						// handle successful
 						.success(function (response) {
@@ -481,7 +488,33 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 								$scope.word = "";
 							}
 							else {
-								console.log('Error with response');
+								// try wikipedia API for footnotes
+								var wikipedia_api_url = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=cell%20biology";
+
+								// append multiple words to the url
+								/*angular.forEach(words, function(word, key){
+
+									// if more than one word
+									if (key >= 1) {
+										wikipedia_api_url += "%20" + word;
+									}
+									else {
+										wikipedia_api_url += word.toLowerCase();
+									}
+								})*/
+
+
+								// get data from API
+								$http.get(wikipedia_api_url)
+
+									// handle successful
+									.success(function (response) {
+										console.log(wikipedia_api_url);
+										console.log(response);
+									})
+								
+
+								//console.log('Error with response');
 							}
 				})
 			})
@@ -564,8 +597,10 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 ])
 
 
-// NAV controller
-// ------------------------------
+/* 	Nav Controller 
+ * 	Used for controlling sessions
+ *
+*/
 .controller('NavCtrl', ['$scope', 'Auth', '$window', 'lists',
 
 	// Main scope (used in views)
@@ -601,8 +636,10 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 
 ])
 
-// Authentification controller
-// ------------------------------
+/* 	Auth Controller 
+ * 	Used for authentication (login/register)
+ *
+*/
 .controller('AuthCtrl', ['$scope', '$state', 'Auth',
 
 // Main scope (used in views)
