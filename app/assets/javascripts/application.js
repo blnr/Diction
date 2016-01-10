@@ -489,7 +489,7 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 							}
 							else {
 								// try wikipedia API for footnotes
-								var wikipedia_api_url = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=cell%20biology";
+								var wikipedia_api_url = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=Stack%20Overflow";
 
 								// append multiple words to the url
 								/*angular.forEach(words, function(word, key){
