@@ -1,4 +1,4 @@
-<!-- list header section, top of page  -->
+<!-- top list header section, top of page  -->
 <div class="row">
 
   <!-- current list and rename list -->
@@ -47,6 +47,9 @@
   <!-- add word -->
   <form ng-submit="addWords()">
     <input type="text" ng-model="$parent.word" id="search-word" placeholder="Add words..." autofocus="true"></input>
+    <button type="button" class="button-icon">
+      <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+    </button>
     <button type="button" class="button-icon">
       <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
     </button>

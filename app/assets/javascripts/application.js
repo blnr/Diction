@@ -84,63 +84,64 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 .factory('lists', ['$http', '$state',
 
 	function($http, $state){
+		
 		// create new obect with array of lists
-		var o = { lists: [] };
+		var listsObject = { lists: [] };
 
 	  	// get all lists
-		o.getAll = function() {
+		listsObject.getAll = function() {
 			return $http.get('/lists.json').success(function(data){
-		  		angular.copy(data, o.lists);
+		  		angular.copy(data, listsObject.lists);
 			});
 		};
 
 		// get specific list
-		o.get = function(id) {
+		listsObject.get = function(id) {
 		  return $http.get('/lists/' + id + '.json').then(function(res){
 		    return res.data;
 		  });
 		};
 
 		// get specific list
-		o.get_public = function(hash_key) {
+		listsObject.get_public = function(hash_key) {
 			return $http.get('/public/' + hash_key + '.json').then(function(data){
 		  		// only return if param matches public list hash
 		  		if (data['data'] == 'null') {
 					$state.go('home');
 		  		}
 		  		else {
-			  		angular.copy(data, o.lists);
+			  		angular.copy(data, listsObject.lists);
 		  		}
 			});
 		};
 
 		// create list
-		o.create = function(post) {
+		listsObject.create = function(post) {
 		  return $http.post('/lists.json', post).success(function(data){
-		    o.lists.push(data);
+		    listsObject.lists.push(data);
 		  });
 		};
 
 		// update list
-		o.update = function(id, post) {
+		listsObject.update = function(id, post) {
 			$http.put('/lists/' + id + '.json', post);
 		}
 
 		// delete list
-		o.delete = function(id) {
+		listsObject.delete = function(id) {
 			$http.delete('/lists/' + id + '.json');
 		}
 
 		// add word to list
-		o.addWord = function(id, word) {
+		listsObject.addWord = function(id, word) {
 		  return $http.post('/lists/' + id + '/words.json', word);
 		};
 
-		o.deleteWord = function(id, word) {
+		listsObject.deleteWord = function(id, word) {
 			$http.delete('/lists/' + id + '/words/' + word + '.json');
 		}
 
-	  	return o;
+	  	return listsObject;
 
 	}
 ])
@@ -488,33 +489,17 @@ angular.module('diction', ['ui.router', 'templates', 'ui.tree', 'ui.gravatar', '
 								$scope.word = "";
 							}
 							else {
-								// try wikipedia API for footnotes
-								var wikipedia_api_url = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=Stack%20Overflow";
-
-								// append multiple words to the url
-								/*angular.forEach(words, function(word, key){
-
-									// if more than one word
-									if (key >= 1) {
-										wikipedia_api_url += "%20" + word;
-									}
-									else {
-										wikipedia_api_url += word.toLowerCase();
-									}
-								})*/
-
-
-								// get data from API
-								$http.get(wikipedia_api_url)
-
-									// handle successful
-									.success(function (response) {
-										console.log(wikipedia_api_url);
-										console.log(response);
-									})
-								
-
-								//console.log('Error with response');
+								// no API response...
+								// push new word to array
+								$scope.list.words.unshift({
+									title: words,
+									// meta
+									display: words,
+									date: new Date(),
+									definitions: []
+								});
+								// clear word
+								$scope.word = "";
 							}
 				})
 			})
