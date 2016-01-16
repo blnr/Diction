@@ -1,0 +1,34 @@
+
+	<div class="splash-message">
+
+			<!-- welcome message -->
+			<div class="row">
+
+				<div class="welcome-message">
+					<p class="header">Diction is a simple tool for creating, and sharing vocabulary <u title="View an example of a published list" class="underline"><a href="http://www.diction.help/#/public/FWMLT">lists</a></u>. <span class="underline-hover grey" title="Read more...">( <a href="http://github.com/kylesb/diction.help#dictionhelp">...</a> )</span></p>
+					
+				</div>
+				
+			</div>
+			<!-- /welcome message -->
+
+			<!-- start search -->
+			<div class="row">
+
+				<abbr title="search">
+					<!-- add word -->
+					<form ng-submit="createList()" class="form-inline splash-search">
+						<div class="form-group">
+							<input type="text" id="form-search" class="splash-input" ng-model="$parent.word" placeholder="epitome, fallacy, dismal" autofocus></input>
+							<button type="button" class="button-sm btn btn-default" aria-label="Left Align">
+							  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+							</button>
+						</div>
+			        </form>
+			        <!-- end add -->
+				</abbr>									
+			
+			</div>
+			<!-- /search -->
+
+	</div>
