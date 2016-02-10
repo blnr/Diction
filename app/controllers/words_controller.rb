@@ -27,7 +27,13 @@ class WordsController < ApplicationController
   end
 
   def api
-    respond_with view_context.dictionary(params[:word])
+    if (params[:word].include? "(d)")
+      respond_with view_context.dictionary(params[:word].sub("(d)", ""))
+    elsif (params[:word].include? "(w)")
+      respond_with view_context.wikipedia(params[:word].sub("(w)", ""))
+    else
+      respond_with view_context.dictionary(params[:word])
+    end
   end
 
   private
