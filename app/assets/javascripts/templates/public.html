@@ -4,8 +4,8 @@
     <div class="col-md-6 pull-left">
 	    <p class="h3" title="This is a public accessible link">
         {{ list.title }}
-        <small class="margin-left-right-10px">[ 
-          <span class="background-aliceBlue">public</span> 
+        <small class="margin-left-right-10px">[
+          <span class="background-aliceBlue">public</span>
         ]</small>
       </p>
 	    <p>
@@ -22,49 +22,38 @@
   <div class="row" ng-if="list">
 
     <div class="col-md-6 pull-left">
-      <p class="pull-left">Last updated: {{ list.updated_at }}</p>
+      <p class="pull-left">Created: {{ list.created_at }}</p>
     </div>
 
     <!-- float right -->
-    <section class="pull-right">
-
-      <!-- hidden section -->
-      <section class="word-options display-inline">
-        <!-- filter options -->
-        <div class="option-choice">
-          <input class="sort-option" ng-model="$parent.searchText" value="{{ selectedOrder.name }}" placeholder="Filter...">
-          <!-- sort options -->
-          <div class="option-choice">
-            <div class="dropdown display-inline">
-              <button type="button" class="button-icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li ng-repeat="option in sortOptions"><a ng-click="updateSort($index)">{{ option.name }}</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="option-choice">
-          <!-- collapse -->
-          <span class="display-menu-text"><input type="checkbox" ng-model="$parent.minimal" aria-label="Toggle ngHide" /> Collapse</span>
-        </div>
-        <div class="option-choice">
-        <!-- date -->
-          <span class="display-menu-text"><input type="checkbox" ng-model="$parent.date" aria-label="Toggle ngShow" /> Date</span>
-        </div>
-      </section>
-      <!-- / hidden -->
+    <section class="pull-right word-options-container">
 
       <button type="button" class="button-icon" id="word-options-click">
         <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
       </button>
+
+      <!-- filter options -->
+      <div class="option-choice">
+        <input class="sort-option" ng-model="$parent.searchText" value="{{ selectedOrder.name }}" placeholder="Filter...">
+        <!-- sort options -->
+        <div class="dropdown display-inline">
+          <button type="button" class="button-icon dropdown-toggle filter-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li ng-repeat="option in sortOptions"><a ng-click="updateSort($index)">{{ option.name }}</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="option-choice">
+        <input min="0" max="5" step=".20" ng-model="inputRange" class="inputRange" ng-change="updateRange(inputRange)" type="range">
+      </div>
+      <!-- / filter -->
+
     </section>
     <!-- / right -->
-
   </div>
-
 
   <div class="row">
 
@@ -80,7 +69,7 @@
       <ol ui-tree-nodes="" ng-model="list.words">
 
         <!-- words in list -->
-        <li ng-mousedown="updateSort()" ng-repeat="word in list.words | orderBy:selectedOrder.value:selectedOrder.reversed | filter:searchText" class='word word-container' id="word-{{word.id}}" ui-tree-node>
+        <li ng-repeat="word in list.words | orderBy:selectedOrder.value:selectedOrder.reversed | filter:searchText" class='word word-container' id="word-{{word.id}}" ui-tree-node>
 
           <p ui-tree-handle class="word word-title">{{ word.title }}</p>
 
@@ -89,15 +78,16 @@
             <p class="speech">{{ word.speech }}</p>
 
             <ol class="definitions">
-              <div ng-repeat="w in word.definitions">
-                <li role="definition">{{ w.meaning }}</li>
-                <p class="example" ng-if="w.examples[0] !== nil">{{ w.examples[0] }}</p>
-              </div>
+              <div ng-repeat="w in word.dictionary">
+                <li role="definition">{{ w.definition }}
+                  <small><a target="_blank" ng-if="word.link" href="{{ word.link }}">( ... )</a></small>
+                </li>
+                <p class="example" ng-if="w.example !== false">{{ w.example }}</p>
             </ol>
 
           </section>
 
-          <p ng-show="date">Created at: {{word.created_at}}</p>
+          <p ng-show="date">Created at: {{word.date}}</p>
 
         </li>
       </ol>
