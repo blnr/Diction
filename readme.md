@@ -1,31 +1,31 @@
 # diction.help
 
-An AngularJS and Rails single-page web-application for creating and sharing vocabulary lists. 
+A contemporary, single page web application for creating and sharing footnotes from a variety of API's - including Oxford Dictionary and Wikipedia.
 
-http://diction.help
-
-## Settings
-
-All index searches are temperary sessions on the client-side, which means if you refresh the page, the data will be lost. In order to save and share lists, you must log-in or create an account. 
-
-Features:
-
-* Create and save vocabulary lists
-* Get public sharable link for any given list
-* Search for multiple words simultaneously through comma seperation (e.g. epitome, fallacy, aloof) 
-* Filter words by title, speech, or definition keywords (e.g. adj, noun, 'aloof')
-* Configure word order through drag and drop using the 'custom order' sort option
+<i>diction.help</i>
 
 ## Purpose
 
-I created this project as a means of helping to expand my vocabulary. Usually, when I come across unfamilar words in a journal or novel, I'll take the time to look them up and add them to a text document. This tool helps organize large collections (i.e. lists) of words through several sorting and filtering options, making it more pragmatic and accessible than a standard text document. 
+Mainly a continuing AngularJS and Rails learning experiment, but also used to help learn new vocabulary and information through the indexation of data served from Oxford Dictionary and Wikipedia. The Wikipedia API data provides article summary blurbs with links to the main articles. 
+
+## Settings
+
+All index searches are temporary sessions on the client-side; if you leave or refresh the page, the data will be lost. To save lists, you must create an account.
+
+Features:
+
+* Create, save, and share footnotes from a variety of API's (Oxford Dictionary, Wikipedia)
+* Get a shareable URL for a list
+* Search for multiple words simultaneously through comma separation: "epitome, fallacy, aloof"
+* Target specific API's in search using a parameter
+  * Wikipedia: "cell biology (w)"
+  * Oxford Dictionary: "epitome (d)"
+* Various filtering and sorting options
 
 ## Architecture
 
-Data source: Oxford Dictionary API<br>
 Front-end: 	AngularJS 1.2.19<br>
 Back-end:	Ruby on Rails 4.2
-
 
 ## Cloning
 
