@@ -4,8 +4,9 @@ gem 'rails', '4.2.0'
 gem 'pg'
 gem 'heroku'
 
-gem 'responders', '~> 2.0' 
+gem 'responders', '~> 2.0'
 gem 'httparty', '0.11.0'
+gem 'nokogiri'
 gem 'bcrypt', '3.1.7'
 
 gem 'sass-rails', '~> 5.0'
@@ -39,4 +40,3 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-

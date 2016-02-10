@@ -1,13 +1,12 @@
 //= require angular-rails-templates
 //= require_tree .
 
-
 angular.module('diction', [
-	'ui.router', 
-	'templates', 
-	'ui.tree', 
-	'Devise', 
-	'angular-loading-bar', 
+	'ui.router',
+	'templates',
+	'ui.tree',
+	'Devise',
+	'angular-loading-bar',
 	'ui.bootstrap',
 	'diction.controllers',
 	'diction.factories'
@@ -25,36 +24,36 @@ angular.module('diction', [
 		.state('home', {
 		  url: '/home',
 		  templateUrl: 'home.html',
-		  controller: 'GuestCtrl',
+		  controller: 'MainCtrl',
 	      onEnter: ['$state', 'Auth', function($state, Auth) {
 	        Auth.currentUser().then(function (){
-	          $state.go('dashboard');
+	          $state.go('user');
 	        })
 	      }]
 		})
 
-		// guest dashboard
-	    .state('search', {
-	      url: '/search',
-	      templateUrl: 'search.html',
-	      controller: 'GuestCtrl',
-	      onEnter: ['$state', 'Auth', function($state, Auth) {
-	        Auth.currentUser().then(function (){
-	          $state.go('dashboard');
-	        })
-	      }]
+		// guest state
+	    .state('guest', {
+			url: '/dashboard',
+			templateUrl: 'dashboard.html',
+			controller: 'MainCtrl',
+			onEnter: ['$state', 'Auth', function($state, Auth) {
+				Auth.currentUser().then(function (){
+					$state.go('user');
+				})
+			}]
 	    })
 
-		// user dashboard
-		.state('dashboard', {
-		  url: '/dashboard',
-		  templateUrl: 'dashboard.html',
-		  controller: 'UserCtrl',
-		  resolve: {
-			  listPromise: ['lists', function(lists){
-			    return lists.getAll();
-			  }]
-		  }
+		// Dashboard state
+		.state('user', {
+			url: '/dashboard',
+			templateUrl: 'dashboard.html',
+			controller: 'MainCtrl',
+			resolve: {
+				listPromise: ['lists', function(lists){
+			    	return lists.getAll();
+			  	}]
+			}
 		})
 
 		// public accessible link (readonly)
@@ -72,11 +71,11 @@ angular.module('diction', [
 	    // account registration
 	    .state('register', {
 	      url: '/register',
-	      templateUrl: '_register.html',
+	      templateUrl: 'register.html',
 	      controller: 'AuthCtrl',
 	      onEnter: ['$state', 'Auth', function($state, Auth) {
 	        Auth.currentUser().then(function (){
-	          $state.go('dashboard');
+	          $state.go('user');
 	        })
 	      }]
 	    })

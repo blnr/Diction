@@ -1,4 +1,6 @@
 class WordsController < ApplicationController
+
+  include WordsHelper
   respond_to :json
   before_filter :authenticate_user!, only: [:destroy]
 
@@ -10,7 +12,7 @@ class WordsController < ApplicationController
     else
       word = list.words.create(word_params)
     end
-    
+
     respond_with list, word
   end
 
@@ -21,7 +23,11 @@ class WordsController < ApplicationController
 
   def destroy
     list = List.find(params[:list_id])
-    list.words.find(params[:id]).destroy
+    respond_with list.words.find(params[:id]).destroy
+  end
+
+  def api
+    respond_with view_context.dictionary(params[:word])
   end
 
   private

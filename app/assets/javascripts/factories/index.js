@@ -4,13 +4,13 @@
 angular.module('diction.factories', [])
 
 /* 	Lists factory
- * 	all HTTP post, get requests for list and word objects from the server
+ * 	RESTful requests for list and word objects
  *
 */
 .factory('lists', ['$http', '$state',
 
 	function($http, $state){
-		
+
 		// create new obect with array of lists
 		var listsObject = { lists: [] };
 
@@ -70,4 +70,22 @@ angular.module('diction.factories', [])
 	  	return listsObject;
 
 	}
-]);
+])
+
+
+/* 	apiQueries factory
+ *	Makes request to API and returns response as an object
+*/
+.factory('apiQueries', ['$http', '$state', '$window', function($http, $state, $window){
+
+	// create new obect with array of words
+	var responseObject = { words: [] };
+
+	// Google API
+	responseObject.getData = function(word) {
+		return $http.get("/api/" + word);
+	}
+
+	return responseObject;
+
+}]);

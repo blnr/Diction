@@ -1,449 +1,455 @@
 /*	______________________________
 	GLOBAL
-	______________________________ 
+	______________________________
 */
 
 body {
-	height: 900px;
+  height: 900px;
 }
 
 .input-minimal {
-	width: 250px;
-	background-color: transparent;
-	border: none;
-	border-bottom: thin dotted grey;
+  width: 250px;
+  background-color: transparent;
+  border: none;
+  border-bottom: thin dotted grey;
 }
 
 .list-select {
-	width: 200px;
-	background-color: transparent;
-	border: none;
-	border-bottom: thin dotted grey;
+  width: 200px;
+  background-color: transparent;
+  border: none;
+  border-bottom: thin dotted grey;
 }
 
-
+/* line 26, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 p, span, .input-display {
-	font-size: 16px;
-	font-family: "Times New Roman", serif;
+  font-size: 12px;
+  font-family: "Times New Roman", serif;
 }
 
+/* line 31, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 u.underline {
-	text-decoration: none;
-	border-bottom: thin dotted grey;
+  text-decoration: none;
+  border-bottom: thin dotted grey;
 }
 
-
+/* line 37, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .header {
-	font-size: 26px;
-	line-height: 50px;
-    word-spacing: 2px;
-
+  font-size: 20px;
+  line-height: 50px;
+  word-spacing: 2px;
 }
 
+/* line 44, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .splash-message {
-	width: 800px;
-	margin: 65px auto;
+  width: 650px;
+  margin: 15px auto;
 }
 
-
-
+/* line 51, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 #page-wrap {
   margin: 15px auto;
   width: 90%;
   border: thin;
 }
 
+/* line 57, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 #content {
   float: left;
   width: 100%;
   margin: 165px auto;
 }
 
+/* line 63, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 #form-search, .form-search {
-    border: thin solid #8FB1FF;
-	width: 730px;
+  border: thin solid #8FB1FF;
+  width: 575px;
 }
 
+/* line 68, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .welcome-message {
-	width: 100%;
-	line-height: 40px;
+  width: 100%;
+  line-height: 40px;
 }
 
+/* line 73, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 input:focus {
-	outline: none;
-    border-color: thin solid #eee;
+  outline: none;
+  border-color: thin solid #eee;
 }
 
+/* line 78, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .splash-input {
-  font-size: 16px;
-  height: 36px;
+  font-size: 12px;
+  height: 30px;
   padding: 5px 10px;
   line-height: 1.5;
   border: 1px solid #eee;
   border-radius: 1px;
 }
 
+/* line 87, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .underline-hover {
-	font-size: 10px;
+  font-size: 10px;
 }
 
+/* line 91, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .welcome-message {
-	margin-top: 15px;
-	text-align: left;
+  margin: 0 auto;
+  text-align: left;
+  margin: 0 uato;
 }
 
+/* line 96, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .splash-search {
-	margin-top: 55px;
+  margin-top: 25px;
 }
 
+/* line 100, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .margin-top {
-	margin: 10px 0 0 0;
+  margin: 10px 0 0 0;
 }
 
-
+/* line 105, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 a {
-	text-decoration: none;
-	color: #313131;
-
+  text-decoration: none;
+  color: #313131;
 }
 
+/* line 111, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .blue {
-	  color: #336699;
+  color: #336699;
 }
 
+/* line 115, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .grey {
-	color: grey;
+  color: grey;
 }
 
-
+/* line 120, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .splash-header {
   padding: 40px 15px;
   width: 100%;
- }
+}
 
-
+/* line 126, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .logo-img {
-	float: left;
-	width: 55px;
-	height: auto;
-	margin: -10px 0 0 0;
+  float: left;
+  width: 55px;
+  height: auto;
+  margin: -10px 0 0 0;
 }
 
+/* line 133, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .logo {
-	color: grey;
+  color: grey;
 }
 
-
-
-
-
-
+/* line 142, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 header[role="masthead"] {
-    position: absolute;
-    width: 100%;
-    /*margin: -15px 0 0 0;*/
-    /* border-bottom: thin dotted grey; */
-    /* padding: 25px 0; */
-    /* background-color: #FDFDFD; */
-    min-height: 75px;
-    margin: 0 auto;
-
-	#masthead-container {
-	    margin: 0 auto;
-	    width: 90%;
-	    border-bottom: thin dotted;
-	    min-height: 75px;
-	    overflow: auto;
-	}
+  position: absolute;
+  width: 100%;
+  /*margin: -15px 0 0 0;*/
+  /* border-bottom: thin dotted grey; */
+  /* padding: 25px 0; */
+  /* background-color: #FDFDFD; */
+  min-height: 35px;
+  margin: -10px auto;
+}
+/* line 152, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
+header[role="masthead"] #masthead-container {
+  margin: 0 auto;
+  width: 90%;
+  border-bottom: thin dotted;
+  min-height: 35px;
+  overflow: auto;
 }
 
+/* line 161, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 nav[role="base"] {
-	float: right;
+  float: right;
 }
-
-
-
-
-
 
 /*	Searchpage
 	______________________________
 */
-
-
-
-
-
+/* line 178, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .word {
-	font-size: 24px;
-	margin: 10px 0;
+  font-size: 24px;
+  margin: 10px 0;
 }
 
+/* line 183, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .word-title {
-	color: #1E1F20;
+  color: #1E1F20;
 }
 
+/* line 187, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .word-minimal {
-	font-size: 18px;
-	display: none;	
+  font-size: 18px;
+  display: none;
 }
 
+/* line 192, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .word-pronounce {
-	margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
+/* line 196, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .speech {
-	font-style: italic;
-	margin: -3px 0px;
+  font-style: italic;
+  margin: -3px 0px;
 }
 
+/* line 201, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .definitions {
-	margin: 15px 0;
+  margin: 15px 0;
 }
 
+/* line 205, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 li[role="definition"] {
-	font-size: 14px;
-	color: #333;
-	margin-bottom: 5px;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 5px;
 }
 
+/* line 211, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .example {
-	font-size: 14px;
-	color: #4C4C4C;
-	margin: -2px 0 15px 0;
+  font-size: 14px;
+  color: #4C4C4C;
+  margin: -2px 0 15px 0;
 }
 
+/* line 217, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .button-icon {
-    background-color: transparent;
-    border: thin dotted grey;
-    opacity: 1;
+  background-color: transparent;
+  border: thin dotted grey;
+  opacity: 1;
 }
 
+/* line 223, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .button-icon:hover {
-	opacity: 1;
+  opacity: 1;
 }
 
-
-
-
-
+/* line 231, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 #nav-menu {
-	margin: 25px 0 0 0;
+  margin: 25px 0 0 0;
 }
 
+/* line 235, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .padding-none {
-	padding: 0;
+  padding: 0;
 }
 
+/* line 239, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 #words-container {
-    margin: 45px 0 0 0;
+  margin: 45px 0 0 0;
 }
 
+/* line 243, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .word-container {
     border-left: thin dotted grey;
-    padding-left: 15px;
-    margin-bottom: 10px;
+    padding-left: 15px !important;
+    margin-bottom: 10px !important;
     width: 70%;
-    /* padding: 1px 15px; */
-    padding-bottom: 20px;
+    padding-bottom: 20px !important;
 }
 
+/* line 252, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .word-container:hover {
-    background-color: #FAFAFA;
+  background-color: #FAFAFA;
 }
 
-
+/* line 257, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .dashboard-message {
-	width: 800px;
-	border-bottom: thin dotted #8FB1FF;
-	margin: 0 0 45px 0;
+  width: 800px;
+  border-bottom: thin dotted #8FB1FF;
+  margin: 0 0 45px 0;
 }
 
+/* line 263, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 #login-table {
-	width: 400px;
+  width: 325px;
+  font-size: 12px;
 }
 
+/* line 267, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 #register-table {
-	width: 800px;
+  width: 800px;
 }
 
+/* line 271, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .full-width {
-	width: 100%;
+  width: 100%;
 }
 
-
+/* line 276, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 form {
-    display: inline-block;
+  display: inline-block;
 }
 
+/* line 280, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .display-inline {
-	display: inline;
+  display: inline;
 }
 
+/* line 284, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .display-none {
-	display: none;
+  display: none;
 }
 
+/* line 288, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .list-options, .word-options {
-	/*display: none;*/
+  /*display: none;*/
 }
 
+/* line 292, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .list-options button {
-    margin: 0 2px;
-    opacity: .85;
+  margin: 0 2px;
+  opacity: .85;
 }
 
+.dropdown-menu, button {
+  font-size: 12px;
+}
+
+/* line 297, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 section {
-	display: inline;
+  display: inline;
 }
 
+/* line 301, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .delete-word {
-	display: none;
+  display: none;
 }
 
+/* line 305, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .well {
-	margin: 25px 0;
-    min-height: 20px;
-    padding: 19px;
-    margin-bottom: 20px;
-    background-color: #FFFFFF;
-    border: 1px solid #e3e3e3;
-    border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+  margin: 25px 0;
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: #FFFFFF;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
+/* line 317, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 #guest-user {
-    clear: both;
-    display: none;
-    margin: 10px 0 0 0;
+  clear: both;
+  display: none;
+  margin: 10px 0 0 0;
 }
 
+/* line 323, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 input:focus {
-    border: thin solid #8FB1FF;
+  border: thin solid #8FB1FF;
 }
 
-.option-choice {
+input.inputRange {
     display: inline;
-    margin: 0 5px;
-    border-right: thin dotted grey;
-    padding: 0 5px 0 0;
-}
-
-.register-benefits-container {
-    border-left: thin dotted grey;
-    margin: 0 75px;
-    padding: 0 25px;
-    height: 220px;
-}
-
-.h3 {
-	font-family: "Times New Roman";
-	font-size: 20px;
-}
-
-.row {
-    margin-right: 0px;
-   	margin-left: 0px;
-}
-
-.glyphicon-menu-down {
-	opacity: .4;
-}
-
-.glyphicon-menu-down:hover {
-	opacity: .85;
-}
-
-#word-options-click {
-	float: right;
-}
-
-.register-container {
-	width: 1200px;
-}
-
-.register-form-container {
-	width: 650px;
-}
-
-.register-form-input {
-	width: 630px;
-}
-
-.register-submit {
-    margin: 20px 170px;
     width: 100px;
+    margin: 0 5px 0 0;
+    opacity: .50;
 }
 
+/* line 327, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
+.option-choice {
+  display: inline;
+  margin: 0 5px;
+  border-right: thin dotted grey;
+  padding: 0 5px 0 0;
+}
+
+/* line 334, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
+.register-benefits-container {
+  border-left: thin dotted grey;
+  padding: 0 25px;
+  height: 220px;
+  font-size: 12px;
+  margin: 0 0 0 45px;
+}
+
+/* line 341, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
+.h3 {
+  font-family: "Times New Roman";
+  font-size: 20px;
+}
+
+/* line 346, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
+.row {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+/* line 351, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
+.glyphicon-menu-down {
+  opacity: .4;
+}
+
+/* line 355, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
+.glyphicon-menu-down:hover {
+  opacity: .85;
+}
+
+/* line 359, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
+#word-options-click {
+  float: right;
+}
+
+h2.register {
+  font-size: 25px;
+}
+
+/* line 363, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
+.register-container {
+  width: 1200px;
+}
+
+/* line 367, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
+.register-form-container {
+  width: 650px;
+  font-size: 12px;
+  font-family: sans serif;
+}
+
+/* line 371, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
+.register-form-input {
+  width: 630px;
+}
+
+/* line 375, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
+.register-submit {
+  margin: 20px 170px;
+  width: 100px;
+}
+
+/* line 380, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .input-display {
-	background-color: transparent;
-	border: none;
-	min-width: 75%;
+  background-color: transparent;
+  border: none;
+  min-width: 75%;
 }
 
+/* line 386, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .input-display:hover {
-    border: thin dotted #8FB1FF;
+  border: thin dotted #8FB1FF;
 }
 
+/* line 390, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .margin-left-right-10px {
-	margin: 0 10px;
+  margin: 0 10px;
 }
 
+/* line 394, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .margin-left-right-3px {
-	margin: 0 3px;
+  margin: 0 3px;
 }
 
+/* line 398, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
 .background-aliceBlue {
-	background-color: aliceblue;
+  background-color: aliceblue;
 }
-
-
-@media screen and (max-width: 600px) {
-	#content {
-		margin: 125px auto;
-	}
-
-	.splash-message {
-	    width: 100%;
-	    margin: 25px auto;
-	}
-
-	#form-search, .form-search {
-	    border: thin solid #8FB1FF;
-	    width: 400px;
-	}
-
-	.word-options {
-	    float: left;
-	    clear: both;
-	    display: none;
-    	margin: 15px 0 0 -5px;
-	}
-
-	.word-options-container {
-	    width: 100%;
-	    padding: none;
-	    margin: none;
-	    margin: 0;
-	    padding: 0;
-	    margin-top: -20px;
-	}
-
-	#word-options-click {
-    	margin-top: -10px;
-	}
-
-	.filter-button {
-		margin: 0 0 0 -3px;
-	}
-
-	.word-container {
-		width: 100%;
-	}
-
-}
-
-
-
-
