@@ -106,8 +106,9 @@ angular.module('diction.controllers', [
 			angular.forEach(query, function(word, key){
 				apiQueries.getData(word).then(function(response) {
 
-					if (key >= query.length - 1)
+					if (key >= query.length - 1) {
 						$window.location.assign('/#/dashboard');
+					}
 
 					if ($scope.user) {
 						lists.addWord($scope.list.id, {
@@ -325,7 +326,7 @@ angular.module('diction.controllers', [
 
 		$scope.register = function() {
 			Auth.register($scope.user).then(function(){
-			  $state.go('home');
+			  $state.go('user');
 			});
 		};
 
