@@ -117,10 +117,14 @@
 
           <ol class="definitions">
             <div ng-repeat="w in word.dictionary">
-              <li role="definition">{{ w.definition }}
-                <small><a target="_blank" ng-if="word.link" href="{{ word.link }}">( ... )</a></small>
-              </li>
-              <p class="example" ng-if="w.example !== false">{{ w.example }}</p>
+              <div ng-if="word.speech == '[ wikipedia ]' || word.speech == '[ note ]'">
+                <textarea class="input-display textarea">{{ w.definition }}</textarea>
+                <!--<small><a target="_blank" ng-if="word.link" href="{{ word.link }}">( ... )</a></small>-->
+              </div>
+              <div ng-if="word.speech != '[ wikipedia ]' && word.speech != '[ note ]'">
+                <li role="definition">{{ w.definition }}</li>
+                <p class="example" ng-if="w.example !== false">{{ w.example }}</p>
+              </div>
           </ol>
 
         </section>

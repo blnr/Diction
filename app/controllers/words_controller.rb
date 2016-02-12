@@ -31,6 +31,8 @@ class WordsController < ApplicationController
       respond_with view_context.dictionary(params[:word].sub("(d)", ""))
     elsif (params[:word].include? "(w)")
       respond_with view_context.wikipedia(params[:word].sub("(w)", ""))
+    elsif (params[:word].include? "(f)")
+      respond_with view_context.footnote(params[:word].sub("(f)", ""))
     else
       respond_with view_context.dictionary(params[:word])
     end

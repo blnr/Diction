@@ -28,7 +28,7 @@ module WordsHelper
         word_object["data"] = []
 
         # set dictionary data
-        5.times do |i|
+        3.times do |i|
           # Create new definition_data object
           definition_data = Hash.new
 
@@ -67,15 +67,39 @@ module WordsHelper
 
     # get response
     response = HTTParty.get("https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=#{search.sub(' ', '%20')}")
-    # get unique page ID key to access nested data in response
-    key = response['query']['pages'].keys
+
+      # get unique page ID key to access nested data in response
+      key = response['query']['pages'].keys
+
+      # set meta data
+      word_object["word"] = search
+      word_object["data"] = []
+
+      if (response['query']['pages'][key[0]]['extract'] rescue false != false)
+        word_object["speech"] = "[ wikipedia ]"
+        word_object["link"] = "https://en.wikipedia.org/wiki/#{search.sub(' ', '_')}"
+        definition_data['definition'] = truncate(response['query']['pages'][key[0]]['extract'], :length => 350)
+      else
+        word_object["speech"] = "[ note ]"
+        definition_data['definition'] = "Enter footnote information..."
+      end
+
+      word_object["data"][0]  = definition_data
+    return word_object.to_json
+  end
+
+  # footnote function
+  # creates custom footnote, no API
+  def footnote(search)
+    # Create new hash object to hold data
+    word_object     = Hash.new
+    definition_data = Hash.new
 
     # set meta data
     word_object["word"] = search
-    word_object["speech"] = "[ wikipedia ]"
-    word_object["link"] = "https://en.wikipedia.org/wiki/#{search.sub(' ', '_')}"
+    word_object["speech"] = "[ note ]"
     word_object["data"] = []
-    definition_data['definition'] = truncate(response['query']['pages'][key[0]]['extract'], :length => 360)
+    definition_data['definition'] = "Enter footnote information..."
     word_object["data"][0]  = definition_data
 
     return word_object.to_json

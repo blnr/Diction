@@ -211,6 +211,7 @@ li[role="definition"] {
   font-size: 14px;
   color: #333;
   margin-bottom: 5px;
+  width: 85%;
 }
 
 /* line 211, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
@@ -431,7 +432,13 @@ h2.register {
 .input-display {
   background-color: transparent;
   border: none;
-  min-width: 75%;
+
+  font-family: inherit;
+  font-size: 14px;
+  color: #333;
+  min-height: 115px;
+  width: 85%;
+  margin: 0 0 0 -20px;
 }
 
 /* line 386, /Users/kyle/Desktop/dev/diction/app/assets/stylesheets/main.css.scss */
