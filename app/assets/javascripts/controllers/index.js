@@ -153,9 +153,10 @@ angular.module('diction.controllers', [
 			$scope.list.words.splice($scope.list.words.indexOf(word), 1);
 		};
 
-		/* 	deleteList function
-		 * 	deletes list based on ID
+		/* 	updateList function
+		 * 	updates list based on ID
 		 *
+		 * @param list object, or list ID
 		*/
 		$scope.updateList = function(list) {
 			if ($scope.user) {
@@ -170,6 +171,11 @@ angular.module('diction.controllers', [
 					// call factory function and pass list array param
 					lists.update($scope.list.id, angular.toJson($scope.list));
 				}
+			}
+			else {
+				if (!list['title'])
+					// update on client side
+					$scope.list = $scope.lists[list];
 			}
 		};
 
