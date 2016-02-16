@@ -1,18 +1,14 @@
 # diction.help
 
-A contemporary, single page web application for creating and sharing footnotes from a variety of API's - including Oxford Dictionary and Wikipedia.
+A simple, single page web application for creating and sharing footnotes from a variety of API's - including Oxford Dictionary and Wikipedia.
 
 <i><a href="http://diction.help">diction.help</a></i>
 
-## Purpose
+## About
 
 Mainly a continuing AngularJS and Rails learning experiment, but also used to help learn new vocabulary and information through the indexation of data served from Oxford Dictionary and Wikipedia. The Wikipedia API data provides article summary blurbs with links to the main articles.
 
 ## Settings
-
-All index searches are temporary sessions on the client-side; if you leave or refresh the page, the data will be lost. To save lists, you must create an account.
-
-Features:
 
 * Create, save, and share footnotes from a variety of API's (Oxford Dictionary, Wikipedia)
 * Get a shareable URL for a list
@@ -24,8 +20,8 @@ Features:
 
 ## Architecture
 
-Front-end: 	AngularJS 1.2.19<br>
-Back-end:	Ruby on Rails 4.2
+AngularJS 1.2<br>
+Ruby on Rails 4.2
 
 ## Cloning
 
