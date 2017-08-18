@@ -2,7 +2,7 @@
 
 A simple, single page web application for creating and sharing footnotes from a variety of API's - including Oxford Dictionary and Wikipedia.
 
-<i><a href="http://diction.help">diction.help</a></i>
+<i><a href="https://diction-help.herokuapp.com/">https://diction-help.herokuapp.com</a></i>
 
 ## About
 
@@ -25,7 +25,7 @@ Ruby on Rails 4.2
 
 ## Cloning
 
-To get up and running locally...
+To get up and running locally:
 
 > git clone https://github.com/kylesb/diction.help.git<br>
 > bundle update<br>
