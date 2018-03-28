@@ -2,8 +2,6 @@
 
 A simple, single page web application for creating and sharing footnotes from a variety of API's - including Oxford Dictionary and Wikipedia.
 
-<i><a href="https://diction-help.herokuapp.com/">https://diction-help.herokuapp.com</a></i>
-
 ## About
 
 Mainly a continuing AngularJS and Rails learning experiment, but also used to help learn new vocabulary and information through the indexation of data served from Oxford Dictionary and Wikipedia. The Wikipedia API data provides article summary blurbs with links to the main articles.
