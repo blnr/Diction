@@ -1,6 +1,6 @@
 # diction.help
 
-A simple, single page web application for creating and sharing footnotes from a variety of API's - including Oxford Dictionary and Wikipedia.
+A single page web application for creating and sharing vocabulary lists and footnotes from a variety of API's - including Oxford Dictionary and Wikipedia.
 
 ## About
 
