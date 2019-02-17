@@ -1,6 +1,6 @@
-# diction.help
+# Diction
 
-A single page web application for creating and sharing vocabulary lists and footnotes from a variety of API's - including Oxford Dictionary and Wikipedia.
+A web based software application for cataloging dictionary words, and footnotes.
 
 ## About
 
@@ -8,7 +8,7 @@ Mainly a continuing AngularJS and Rails learning experiment, but also used to he
 
 ## Settings
 
-* Create, save, and share footnotes from a variety of API's (Oxford Dictionary, Wikipedia)
+* Create, save, and share *lists* from a variety of API's (Oxford Dictionary, Wikipedia)
 * Get a shareable URL for a list
 * Search for multiple words simultaneously through comma separation: "epitome, fallacy, aloof"
 * Target specific API's in search using a parameter
@@ -18,8 +18,8 @@ Mainly a continuing AngularJS and Rails learning experiment, but also used to he
 
 ## Architecture
 
-AngularJS 1.2<br>
-Ruby on Rails 4.2
+Ruby on Rails 4.2<br>
+AngularJS 1.2
 
 ## Cloning
 

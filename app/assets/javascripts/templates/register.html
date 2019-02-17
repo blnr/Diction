@@ -1,8 +1,11 @@
 
 <div ng-controller="AuthCtrl">
 
-	<h2 class="register">Join Diction today.</h2>
-	<p>Diction is a simple, <a href="http://github.com/kylesb/diction.help">open-source</a> web application for creating and sharing vocabulary lists.</p>
+	<h2 class="register">Request Account:</h2>
+
+	<p>Diction is an <a href="http://github.com/kylesb/diction.help">open-source</a> web application for creating and sharing annotation lists.</p>
+
+	<p>Registeration is limited in an attempt to restrain throttling of API, and Web Dyno usage. This project is cloud hosted free via Heroku.</p>
 
 	<hr class="dash">
 
@@ -10,7 +13,18 @@
 
 		<div class="register-form-container pull-left">
 
-			<form ng-submit="register()">
+			<form class="width-100" action="mailto:belanger.kyle@gmail.com" method="post" enctype="text/plain">
+				Full name:<br>
+				<input type="text" name="name"><br>
+				Email:<br>
+				<input type="text" name="mail"><br>
+				Comment:<br>
+				<textarea></textarea><br><br>
+				<input type="submit" value="Send">
+				<input type="reset" value="Reset">
+			</form>
+
+			<!-- <form ng-submit="register()">
 				<table id="register-table">
 					<tr>
 						<td><span>Full name:</span></td>
@@ -41,16 +55,16 @@
 					</tr>
 				</table>
 
-			</form>
+			</form> -->
 		</div>
 
 		<div class="pull-left register-benefits-container">
-			<p>Registeration benefits:</p>
+			<p>Account benefits:</p>
 
 			<ul>
-				<li>Save lists, and access them later.</li>
-				<li>Ability to update, add-to, or delete shared lists.</li>
-				<li>Share an unlimited amount of lists.</li>
+				<li>Save annotation lists for future access.</li>
+				<li>Ability to update, add-to, or delete private and shared annotation lists.</li>
+				<li>Create and share annotation lists via a private URL.</li>
 			</ul>
 		</div>
 	</div>

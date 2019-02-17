@@ -3,7 +3,7 @@
 
 	<head>
 		<title>Diction</title>
-		<meta name="Description" content="A simple tool for creating and sharing vocabulary lists.">
+		<meta name="Description" content="A web based application for creating and sharing annotation lists.">
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
@@ -11,7 +11,7 @@
 
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		
+
 		<%= stylesheet_link_tag    'application', media: 'all' %>
 		<meta name="viewport" content="width=device-width" />
 		<%= javascript_include_tag 'application' %>
@@ -40,7 +40,7 @@
 						<!-- loggin in -->
 						<nav ng-show="signedIn()" ng-controller="NavCtrl" class="pull-right" style="margin: 5px 10px 0 0;">
 							<p><a ng-click="logout()">Log Out</a>, {{user.full_name.split(" ")[0] }}</p>
-						</nav> 
+						</nav>
 						<!-- / logged -->
 
 						<!-- guest user -->
@@ -64,7 +64,7 @@
 										<tr>
 											<td style="margin: 10px 0; display: block;">
 												<button class="pull-left button-icon" type="submit" id="submit" class="text" value="Log In">Log In</button>
-												<span class="button-icon pull-right">[ <a href="http://diction.help/#/register">create account</a> ]</span>
+												<span class="button-icon pull-right">[ <a href="http://diction-help.herokuapp.com/#/register">Request Account</a> ]</span>
 											</td>
 										</tr>
 									</table>
@@ -75,7 +75,7 @@
 						<!-- / guest -->
 					</div>
 
-					<!-- nav user 
+					<!-- nav user
 					<nav id="nav-user">
 						<span style="margin-left: 5px;" class="menu-text" ng-show="signedIn()"><a ng-click="logout()">Log Out</a></span>
 						<span class="menu-text">-</span>
@@ -94,7 +94,7 @@
 			<!-- end render -->
 
 			<!-- page overlay for login -->
-			<span id="page-overlay"></span>	
+			<span id="page-overlay"></span>
 
 		</div>
 	</body>
